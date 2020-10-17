@@ -7,7 +7,30 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
+<script>
+(function() {
+  function addWidgetsRenderer() {
+    var mimeElement = document.querySelector('script[type="application/vnd.jupyter.widget-view+json"]');
+    var scriptElement = document.createElement('script');
+    var widgetRendererSrc = '@jupyter-widgets/html-manager@*/dist/embed-amd.js';
+    var widgetState;
 
+    // Fallback for older version:
+    try {
+      widgetState = mimeElement && JSON.parse(mimeElement.innerHTML);
+
+      if (widgetState && (widgetState.version_major < 2 || !widgetState.version_major)) {
+        widgetRendererSrc = 'jupyter-js-widgets@*/dist/embed.js';
+      }
+    } catch(e) {}
+
+    scriptElement.src = widgetRendererSrc;
+    document.body.appendChild(scriptElement);
+  }
+
+  document.addEventListener('DOMContentLoaded', addWidgetsRenderer);
+}());
+</script>
 
 <style type="text/css">
     /*!
@@ -13084,7 +13107,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="We-are-interested-in-calculating-the-following-liquidity-measures:">We are interested in calculating the following liquidity measures:<a class="anchor-link" href="#We-are-interested-in-calculating-the-following-liquidity-measures:">&#182;</a></h3><h4 id="i)-Average-$i^{th}$-level-bid-depth:-$\text{$\bf-ABD$}^k_i$">i) Average $i^{th}$ level bid depth: $\text{$\bf ABD$}^k_i$<a class="anchor-link" href="#i)-Average-$i^{th}$-level-bid-depth:-$\text{$\bf-ABD$}^k_i$">&#182;</a></h4><p>$= mean( ( \sum^i_{j=1} \text{bsize}^k_{j,1},...,\sum^i_{j=1}\text{bsize}^k_{j,|\tau_k|}) )$</p>
+<h3 id="We-have-Limit-Order-Books-of-the-stock-GARAN-for-the-trading-days-in-2017.-Using-bid-and-ask-prices-and-volumes-at-different-levels-in-the-order-book,-we-are-interested-in-calculating-the-following-liquidity-measures-for-every-minute-interval,-denoted-by-superscript-k:">We have Limit Order Books of the stock GARAN for the trading days in 2017. Using bid and ask prices and volumes at different levels in the order book, we are interested in calculating the following liquidity measures for every minute interval, denoted by superscript k:<a class="anchor-link" href="#We-have-Limit-Order-Books-of-the-stock-GARAN-for-the-trading-days-in-2017.-Using-bid-and-ask-prices-and-volumes-at-different-levels-in-the-order-book,-we-are-interested-in-calculating-the-following-liquidity-measures-for-every-minute-interval,-denoted-by-superscript-k:">&#182;</a></h3><h4 id="i)-Average-$i^{th}$-level-bid-depth:-$\text{$\bf-ABD$}^k_i$">i) Average $i^{th}$ level bid depth: $\text{$\bf ABD$}^k_i$<a class="anchor-link" href="#i)-Average-$i^{th}$-level-bid-depth:-$\text{$\bf-ABD$}^k_i$">&#182;</a></h4><p>$= mean( ( \sum^i_{j=1} \text{bsize}^k_{j,1},...,\sum^i_{j=1}\text{bsize}^k_{j,|\tau_k|}) )$</p>
 <h4 id="ii)-Average-$i^{th}$-level-bid-TL-depth:-$\text{$\bf-WABD$}^k_i$">ii) Average $i^{th}$ level bid TL depth: $\text{$\bf WABD$}^k_i$<a class="anchor-link" href="#ii)-Average-$i^{th}$-level-bid-TL-depth:-$\text{$\bf-WABD$}^k_i$">&#182;</a></h4><p>$= mean( ( \sum^i_{j=1} \text{bid}^k_{j,1} \cdot \text{bsize}^k_{j,1},...,\sum^i_{j=1} \text{bid}^k_{j,|\tau_k|} \cdot \text{bsize}^k_{j,|\tau_k|}) )$</p>
 <h4 id="iii)Average-$i^{th}$-level-ask-depth:-$\text{$\bf-AAD$}^k_i$">iii)Average $i^{th}$ level ask depth: $\text{$\bf AAD$}^k_i$<a class="anchor-link" href="#iii)Average-$i^{th}$-level-ask-depth:-$\text{$\bf-AAD$}^k_i$">&#182;</a></h4><p>$= mean( ( \sum^i_{j=1} \text{asize}^k_{j,1},...,\sum^i_{j=1}\text{asize}^k_{j,|\tau_k|}) )$</p>
 <h4 id="iv)-Average-$i^{th}$-level-ask-TL-depth:-$\text{$\bf-WAAD$}^k_i$">iv) Average $i^{th}$ level ask TL depth: $\text{$\bf WAAD$}^k_i$<a class="anchor-link" href="#iv)-Average-$i^{th}$-level-ask-TL-depth:-$\text{$\bf-WAAD$}^k_i$">&#182;</a></h4><p>$= mean( ( \sum^i_{j=1} \text{ask}^k_{j,1} \cdot \text{asize}^k_{j,1},...,\sum^i_{j=1} \text{ask}^k_{j,|\tau_k|} \cdot \text{asize}^k_{j,|\tau_k|}) )$</p>
@@ -13094,9 +13117,9 @@ div#notebook {
 <ul>
 <li><p>$i \in \{1,2,...,\text{LOB depth}=5\}$</p>
 </li>
-<li><p>$\tau_k= \{ \text{entry times in LOB which are inside the $k^{th}$ minute of the LOB} \} $</p>
+<li><p>$\tau_k= \{ \text{entry times in LOB which are inside the $k^{th}$ minute interval} \} $</p>
 </li>
-<li><p>$observable^{k}_{j,l}$ : $l^{th}$ value of the observable's values inside the $k^{th}$ minute at level $j$</p>
+<li><p>$observable^{k}_{j,l}$ : $l^{th}$ value of the observable's values inside the $k^{th}$ minute interval at level $j$</p>
 </li>
 <li><p>$mean(\vec{\textbf{x}}) := \frac { \sum_{j=1}^{dim(\vec{\textbf{x}})} x_{j} } {dim(\vec{\textbf{x}})} $</p>
 </li>
@@ -13108,7 +13131,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="We-import-the-Limit-Order-Book-data-frame-of-GARAN-from-Jan-2,-2017-as-an-example:">We import the Limit Order Book data frame of GARAN from Jan 2, 2017 as an example:<a class="anchor-link" href="#We-import-the-Limit-Order-Book-data-frame-of-GARAN-from-Jan-2,-2017-as-an-example:">&#182;</a></h4>
+<h4 id="We-import-the-Limit-Order-Book-data-frame-of-GARAN-from-Jan-2,-2017,-the-first-trading-day-of-the-year,-as-an-example:">We import the Limit Order Book data frame of GARAN from Jan 2, 2017, the first trading day of the year, as an example:<a class="anchor-link" href="#We-import-the-Limit-Order-Book-data-frame-of-GARAN-from-Jan-2,-2017,-the-first-trading-day-of-the-year,-as-an-example:">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -13902,13 +13925,13 @@ div#notebook {
 
  
  
-<div id="420209bb-01b6-4b01-b7a3-39f810478d47"></div>
+<div id="db815dc7-3666-4213-b503-babcf368bc1f"></div>
 <div class="output_subarea output_widget_view ">
 <script type="text/javascript">
-var element = $('#420209bb-01b6-4b01-b7a3-39f810478d47');
+var element = $('#db815dc7-3666-4213-b503-babcf368bc1f');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "3779c16a696d439c8ff1adaf69ae81f4", "version_major": 2, "version_minor": 0}
+{"model_id": "de335674e34541e5bea902ff6361c779", "version_major": 2, "version_minor": 0}
 </script>
 </div>
 
@@ -13935,13 +13958,13 @@ var element = $('#420209bb-01b6-4b01-b7a3-39f810478d47');
 
  
  
-<div id="e3089d18-4f67-4a71-a1ee-9eda96574b3d"></div>
+<div id="df259cb9-e48c-4e84-a4bc-eab90a2f78e4"></div>
 <div class="output_subarea output_widget_view ">
 <script type="text/javascript">
-var element = $('#e3089d18-4f67-4a71-a1ee-9eda96574b3d');
+var element = $('#df259cb9-e48c-4e84-a4bc-eab90a2f78e4');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "135e5e3df643423cb35491fd42307999", "version_major": 2, "version_minor": 0}
+{"model_id": "33b299b144844836b311f3b766b8aac3", "version_major": 2, "version_minor": 0}
 </script>
 </div>
 
@@ -14336,10 +14359,10 @@ var element = $('#e3089d18-4f67-4a71-a1ee-9eda96574b3d');
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="We-start-by-calculating-the-slope-of-the-map">We start by calculating the slope of the map<a class="anchor-link" href="#We-start-by-calculating-the-slope-of-the-map">&#182;</a></h4><p>$\hat{S}_t$ : Accumulated volume at $i^{th}$ level $\longrightarrow$ Average price per share <br>
+<h4 id="We-start-by-calculating-the-slope-of-the-map">We start by calculating the slope of the map<a class="anchor-link" href="#We-start-by-calculating-the-slope-of-the-map">&#182;</a></h4><p>$\hat{S}_{t_n}$ : Accumulated volume at $i^{th}$ level $\longrightarrow$ Average price per share <br>
 $\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; X_{\pm i}= \sum_{j=1}^i x_{\pm j}\longrightarrow 
-\hat{S}_t(X_{\pm i})= \frac { \sum_{j=1}^i p_{\pm j} x_{\pm j} } {X_{\pm i}} \;\; , \;\; x_{\pm j}$: Volume at $j^{th}$ level</p>
-<h4>for every time entry $t$ in the LOB, for ask side (+) and bid side (-). Here the best N ask prices are given by $p_{1}&lt;...&lt;p_{N}$ <br>and the best N bid prices are given by $p_{-1}&gt;...&gt;p_{-N}$, which aligns with the order in our LOB data frame.</h4>
+\hat{S}_{t_n}(X_{\pm i})= \frac { \sum_{j=1}^i p_{\pm j} x_{\pm j} } {X_{\pm i}} \;\; , \;\; x_{\pm j}$: Volume at $j^{th}$ level</p>
+<h4>for every time entry $t_n$ in the LOB, for ask side (+) and bid side (-). Here the best N ask prices are given by $p_{1}&lt;...&lt;p_{N}$ <br>and the best N bid prices are given by $p_{-1}&gt;...&gt;p_{-N}$, which aligns with the order of levels in our LOB data frame.</h4>
 <p>Source: <a href="http://www.sciencedirect.com/science/article/pii/S0378426618301353">http://www.sciencedirect.com/science/article/pii/S0378426618301353</a></p>
 <h4 id="We-take-now-the-bid-side-as-example-and-calculate-$\hat{S}_{t_{3}}(X_{-i})$,-where-$t_{3}$-is-the-$3^{rd}$-row-of-our-LOB:">We take now the bid side as example and calculate $\hat{S}_{t_{3}}(X_{-i})$, where $t_{3}$ is the $3^{rd}$ row of our LOB:<a class="anchor-link" href="#We-take-now-the-bid-side-as-example-and-calculate-$\hat{S}_{t_{3}}(X_{-i})$,-where-$t_{3}$-is-the-$3^{rd}$-row-of-our-LOB:">&#182;</a></h4>
 </div>
@@ -14751,6 +14774,10 @@ $\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; X_{\pm i}= \sum_{j=1}^i x_{\pm j
 </body>
 
  
+
+<script type="application/vnd.jupyter.widget-state+json">
+{"state": {"1114a04211694f3282a5f765dea59d4d": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "ProgressStyleModel", "state": {"description_width": "initial"}}, "18c2535d8cea47c3a70d42cae43b0ae5": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "FloatProgressModel", "state": {"bar_style": "success", "description": "100%", "layout": "IPY_MODEL_e8b63150f4ce439caa31b53572605ab9", "max": 421, "style": "IPY_MODEL_a8dfafe9a2bb4931bf2512cd9023cd97", "value": 421}}, "33b299b144844836b311f3b766b8aac3": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HBoxModel", "state": {"children": ["IPY_MODEL_18c2535d8cea47c3a70d42cae43b0ae5", "IPY_MODEL_bd686ecfaca9473c99e16512174094e6"], "layout": "IPY_MODEL_a676c84bed104b9ea00ceef8f730c139"}}, "36309f683d754b99bfe5c882b08f47d5": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "FloatProgressModel", "state": {"bar_style": "success", "description": "100%", "layout": "IPY_MODEL_84b2cce6df5643aab0a66452bb0db4e0", "max": 20, "style": "IPY_MODEL_1114a04211694f3282a5f765dea59d4d", "value": 20}}, "41062fa542864ad0847ed9dc8c0ba849": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HTMLModel", "state": {"layout": "IPY_MODEL_f3498bd60597498fba2cba32ab2b9d8a", "style": "IPY_MODEL_ac2ff9109fc14449bfde12d3cb57569e", "value": " 20/20 [00:34&lt;00:00,  1.74s/it]"}}, "635e438ca4174eb5a21a5d961ba37b4c": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "84b2cce6df5643aab0a66452bb0db4e0": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "a676c84bed104b9ea00ceef8f730c139": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "a8dfafe9a2bb4931bf2512cd9023cd97": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "ProgressStyleModel", "state": {"description_width": "initial"}}, "aaacddcb1b264f699fe61ddbffef2111": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "ac2ff9109fc14449bfde12d3cb57569e": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"description_width": ""}}, "bd686ecfaca9473c99e16512174094e6": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HTMLModel", "state": {"layout": "IPY_MODEL_635e438ca4174eb5a21a5d961ba37b4c", "style": "IPY_MODEL_faeb509ab6b94393b010f953fbec8a21", "value": " 421/421 [00:26&lt;00:00, 15.60it/s]"}}, "de335674e34541e5bea902ff6361c779": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HBoxModel", "state": {"children": ["IPY_MODEL_36309f683d754b99bfe5c882b08f47d5", "IPY_MODEL_41062fa542864ad0847ed9dc8c0ba849"], "layout": "IPY_MODEL_aaacddcb1b264f699fe61ddbffef2111"}}, "e8b63150f4ce439caa31b53572605ab9": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "f3498bd60597498fba2cba32ab2b9d8a": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "faeb509ab6b94393b010f953fbec8a21": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"description_width": ""}}}, "version_major": 2, "version_minor": 0}
+</script>
 
 
 </html>
