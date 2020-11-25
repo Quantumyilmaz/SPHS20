@@ -13547,7 +13547,7 @@ First, we take the corresponding entries in the trade book for Jan 2nd and make 
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 1912/1912 [00:07&lt;00:00, 244.42it/s]
+<pre>100%|██████████| 1912/1912 [00:07&lt;00:00, 251.75it/s]
 </pre>
 </div>
 </div>
@@ -13674,7 +13674,7 @@ First, we take the corresponding entries in the trade book for Jan 2nd and make 
     <span class="n">t1</span> <span class="o">=</span> <span class="n">make_clock</span><span class="p">(</span><span class="n">time_pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span> <span class="n">t2</span> <span class="o">=</span> <span class="n">make_clock</span><span class="p">(</span><span class="n">time_pair</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
     <span class="n">LOB_times_to_add</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[[</span><span class="kc">True</span> <span class="k">if</span> <span class="n">get_time_inbetween</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="s1">&#39;ms&#39;</span><span class="p">)</span><span class="o">&gt;=</span><span class="mi">0</span>  <span class="ow">and</span> <span class="n">get_time_inbetween</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">t2</span><span class="p">,</span><span class="s1">&#39;ms&#39;</span><span class="p">)</span><span class="o">&gt;=</span><span class="mi">0</span> <span class="k">else</span> <span class="kc">False</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">]]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
     <span class="n">LOB_times</span> <span class="o">+=</span> <span class="n">LOB_times_to_add</span>
-    <span class="n">LOB_conti_ffilled</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">LOB_conti_ffilled</span><span class="p">,</span><span class="n">get_only_last_entry</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">LOB_times_to_add</span><span class="p">],</span><span class="s1">&#39;m&#39;</span><span class="p">,</span><span class="n">ffill</span><span class="o">=</span><span class="kc">True</span><span class="p">)],</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">LOB_conti_ffilled</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">LOB_conti_ffilled</span><span class="p">,</span><span class="n">get_only_last_entry</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">LOB_times_to_add</span><span class="p">],</span><span class="s1">&#39;m&#39;</span><span class="p">,</span><span class="n">ffill</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]],</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="n">LOB_conti</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">LOB_times</span><span class="p">]</span>
 </pre></div>
@@ -13704,8 +13704,8 @@ First, we take the corresponding entries in the trade book for Jan 2nd and make 
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 180/180 [00:00&lt;00:00, 730.46it/s]
-100%|██████████| 237/237 [00:00&lt;00:00, 510.37it/s]
+<pre>100%|██████████| 180/180 [00:00&lt;00:00, 719.72it/s]
+100%|██████████| 237/237 [00:00&lt;00:00, 541.42it/s]
 </pre>
 </div>
 </div>
@@ -14449,8 +14449,8 @@ First, we take the corresponding entries in the trade book for Jan 2nd and make 
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 20/20 [00:07&lt;00:00,  2.79it/s]
-100%|██████████| 417/417 [00:19&lt;00:00, 21.59it/s]
+<pre>100%|██████████| 20/20 [00:06&lt;00:00,  2.90it/s]
+100%|██████████| 417/417 [00:20&lt;00:00, 20.35it/s]
 </pre>
 </div>
 </div>
@@ -15403,7 +15403,7 @@ Variance of price:  0.00020112967295652843
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Due to forward filling it will happen that information at the last minute of a rollling window is the same as the next minute's information, which would mean that the target data's information is present in that window.</p>
+<p>Due to forward filling it will happen that information at the last minute of a rollling window is the same as the next minute's information, which would mean that the target data's information is present in that window. This is the case for the forward fills that take place after the first 60 entries of a day.</p>
 <p>Another reason for the window to possess its target could simply be that some entries in the LOB stay unchanged or reoccur at certain points.</p>
 <p>We now check every rolling window whether it includes its target. While doing that, we also make sure that the next window's last entry has the information of the current window's target.</p>
 <p>Here we also made sure that no error occurs due to floating point precision while changing between lists, numpy arrays and pytorch tensors.</p>
@@ -15433,8 +15433,10 @@ Variance of price:  0.00020112967295652843
     <span class="n">train</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">input</span><span class="p">)</span>
     <span class="n">target</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
     
+<span class="n">due_to_ffill</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:[]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">filedates</span><span class="p">}</span>
+<span class="n">due_to_LOB</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:[]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">filedates</span><span class="p">}</span>
 
-<span class="k">def</span> <span class="nf">get_vector</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">get_vector</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="n">midprice_factor</span><span class="p">):</span>
     <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
     <span class="n">bid_prices</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
     <span class="n">ask_prices</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">11</span><span class="p">:</span><span class="mi">20</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
@@ -15449,28 +15451,54 @@ Variance of price:  0.00020112967295652843
     <span class="n">ask_var</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">i</span><span class="o">*</span><span class="n">k</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">k</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([(</span><span class="n">l</span><span class="o">-</span><span class="n">ask_expectation</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">ask_prices</span><span class="p">],</span><span class="n">ask_vols_norm</span><span class="p">)])</span>
     <span class="k">return</span> <span class="p">[</span><span class="n">mid_price</span><span class="p">,</span><span class="n">bid_expectation</span><span class="p">,</span><span class="n">ask_expectation</span><span class="p">,</span><span class="n">bid_var</span><span class="p">,</span><span class="n">ask_var</span><span class="p">]</span>
     
-<span class="n">tot_ffills</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">tot_inclusion</span> <span class="o">=</span> <span class="mi">0</span>
+
 <span class="n">midprices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">STOCKS_DIR</span><span class="o">+</span><span class="s1">&#39;/GARAN/midprices.npy&#39;</span><span class="p">,</span><span class="n">allow_pickle</span><span class="o">=</span><span class="s1">&#39;TRUE&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">a</span><span class="p">,</span><span class="n">filename</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">filenames</span><span class="p">),</span><span class="n">total</span><span class="o">=</span><span class="mi">253</span><span class="p">):</span>
     <span class="n">ffilled_times</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">STOCKS_DIR</span><span class="o">+</span><span class="sa">f</span><span class="s1">&#39;/GARAN/</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">allow_pickle</span><span class="o">=</span><span class="s1">&#39;TRUE&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
-    <span class="n">tot_ffills</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ffilled_times</span><span class="p">[</span><span class="s1">&#39;index&#39;</span><span class="p">])</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="c1">#shape: (-1,60,21)</span>
     <span class="n">target_data</span> <span class="o">=</span> <span class="n">target</span><span class="p">[</span><span class="n">a</span><span class="p">]</span>
     <span class="n">midprice_factor</span> <span class="o">=</span> <span class="n">midprices</span><span class="p">[</span><span class="s1">&#39;midprice&#39;</span><span class="p">][</span><span class="n">a</span><span class="p">]</span>
     <span class="k">for</span> <span class="n">b</span><span class="p">,(</span><span class="n">window</span><span class="p">,</span><span class="n">window_target</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">target_data</span><span class="p">)):</span>
         <span class="k">if</span> <span class="n">b</span><span class="o">&lt;</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-            <span class="c1"># Here we make sure that no indexing error has taken place</span>
-            <span class="k">assert</span> <span class="n">get_vector</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">b</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">==</span> <span class="n">window_target</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+            
+            <span class="c1">#Here we make sure that no indexing error has taken place</span>
+            
+            <span class="k">assert</span> <span class="n">get_vector</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">b</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">midprice_factor</span><span class="p">)</span> <span class="o">==</span> <span class="n">window_target</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+            
+        <span class="c1"># Here we count the number of times when the target is inside its window, later we will only talk about</span>
+        <span class="c1"># the number of windows with its target data. </span>
+        <span class="c1"># The two are different since there are consecutive forward fills and there will be windows including </span>
+        <span class="c1"># its target multiple times in multiple entries because of that.</span>
+        
         <span class="k">for</span> <span class="n">c</span><span class="p">,</span><span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">window</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">get_vector</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">==</span> <span class="n">window_target</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">():</span>
-                <span class="n">tot_inclusion</span><span class="o">+=</span><span class="mi">1</span>
+            <span class="k">if</span> <span class="n">get_vector</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="n">midprice_factor</span><span class="p">)</span> <span class="o">==</span> <span class="n">window_target</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">ffilled_times</span><span class="p">[</span><span class="s1">&#39;index&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">b</span> <span class="o">+</span> <span class="n">c</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                    <span class="n">due_to_ffill</span><span class="p">[</span><span class="n">filedates</span><span class="p">[</span><span class="n">a</span><span class="p">]]</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">due_to_LOB</span><span class="p">[</span><span class="n">filedates</span><span class="p">[</span><span class="n">a</span><span class="p">]]</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="n">liste</span><span class="p">):</span> 
+    <span class="n">liste</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">liste</span>
+<span class="k">for</span> <span class="n">a</span><span class="p">,</span><span class="n">filename</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">filenames</span><span class="p">),</span><span class="n">total</span><span class="o">=</span><span class="mi">253</span><span class="p">):</span>
+<span class="c1">#     ffills = np.load(cfg.STOCKS_DIR+f&#39;/GARAN/{filename}&#39;,allow_pickle=&#39;TRUE&#39;).item()[&#39;index&#39;]</span>
+<span class="c1">#     assert [sort(list(set(sum(k)+1 for k in due_to_ffill[i]))) for i in due_to_ffill][a]==ffills or [59,74,166].count(a),a</span>
+    <span class="n">ffills</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">STOCKS_DIR</span><span class="o">+</span><span class="sa">f</span><span class="s1">&#39;/GARAN/</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">allow_pickle</span><span class="o">=</span><span class="s1">&#39;TRUE&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()[</span><span class="s1">&#39;index&#39;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">60</span><span class="p">:</span>
+            <span class="n">ffills</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="p">[</span><span class="n">sort</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">due_to_ffill</span><span class="p">[</span><span class="n">i</span><span class="p">])))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">due_to_ffill</span><span class="p">][</span><span class="n">a</span><span class="p">]</span><span class="o">==</span><span class="n">ffills</span>
+
+<span class="n">windows_due_to_ffill</span> <span class="o">=</span> <span class="p">[[</span><span class="o">*</span><span class="nb">set</span><span class="p">(</span><span class="n">k</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">due_to_ffill</span><span class="p">[</span><span class="n">i</span><span class="p">])]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">due_to_ffill</span><span class="p">]</span>
+<span class="n">windows_due_to_LOB</span> <span class="o">=</span> <span class="p">[[</span><span class="o">*</span><span class="nb">set</span><span class="p">(</span><span class="n">k</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">due_to_LOB</span><span class="p">[</span><span class="n">i</span><span class="p">])]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">due_to_LOB</span><span class="p">]</span>
+<span class="n">no_of_windows_due_to_ffill</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span><span class="n">windows_due_to_ffill</span><span class="p">))</span>
+<span class="n">no_of_windows_due_to_LOB</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span><span class="n">windows_due_to_LOB</span><span class="p">))</span>
 
 <span class="n">total_data</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">target</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Total count of data points: </span><span class="si">{</span><span class="n">total_data</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Incidence of target inclusion due to forward filling: </span><span class="si">{</span><span class="p">(</span><span class="n">tot_ffills</span><span class="o">/</span><span class="n">total_data</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Incidence of target inclusion due to unchanged LOB entries: </span><span class="si">{</span><span class="p">((</span><span class="n">tot_inclusion</span><span class="o">-</span><span class="n">tot_ffills</span><span class="p">)</span><span class="o">/</span><span class="n">total_data</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Total incidence of target inclusion: </span><span class="si">{</span><span class="p">(</span><span class="n">tot_inclusion</span><span class="o">/</span><span class="n">total_data</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Incidence of target inclusion due to forward filling: </span><span class="si">{</span><span class="p">(</span><span class="n">no_of_windows_due_to_ffill</span><span class="o">/</span><span class="n">total_data</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Incidence of target inclusion due to recurrence of LOB entries: </span><span class="si">{</span><span class="p">(</span><span class="n">no_of_windows_due_to_LOB</span><span class="o">/</span><span class="n">total_data</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Total incidence of target inclusion: </span><span class="si">{</span><span class="p">((</span><span class="n">no_of_windows_due_to_ffill</span><span class="o">+</span><span class="n">no_of_windows_due_to_LOB</span><span class="p">)</span><span class="o">/</span><span class="n">total_data</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -15491,13 +15519,46 @@ Variance of price:  0.00020112967295652843
 
  
  
-<div id="72227d19-5840-473d-9dcc-63b9b24a02c4"></div>
+<div id="52e85f62-717b-42ea-b03e-05ba3a8f2c28"></div>
 <div class="output_subarea output_widget_view ">
 <script type="text/javascript">
-var element = $('#72227d19-5840-473d-9dcc-63b9b24a02c4');
+var element = $('#52e85f62-717b-42ea-b03e-05ba3a8f2c28');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "d8ecd7b399f645d8b770160ca719ca02", "version_major": 2, "version_minor": 0}
+{"model_id": "ce417cde9b874b4c8989674d6dec5453", "version_major": 2, "version_minor": 0}
+</script>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+
+ 
+ 
+<div id="1a9f113a-20da-413e-b2c9-612158105c4c"></div>
+<div class="output_subarea output_widget_view ">
+<script type="text/javascript">
+var element = $('#1a9f113a-20da-413e-b2c9-612158105c4c');
+</script>
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "3162bba35de541cd88793263b2e6228b", "version_major": 2, "version_minor": 0}
 </script>
 </div>
 
@@ -15511,9 +15572,9 @@ var element = $('#72227d19-5840-473d-9dcc-63b9b24a02c4');
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>
 Total count of data points: 90797
-Incidence of target inclusion due to forward filling: 0.1310615989515072%
-Incidence of target inclusion due to unchanged LOB entries: 0.041851603026531715%
-Total incidence of target inclusion: 0.17291320197803894%
+Incidence of target inclusion due to forward filling: 0.12775752502835996%
+Incidence of target inclusion due to recurrence of LOB entries: 0.0330407392314724%
+Total incidence of target inclusion: 0.16079826425983237%
 </pre>
 </div>
 </div>
@@ -15525,10 +15586,896 @@ Total incidence of target inclusion: 0.17291320197803894%
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In total we have 90797 rolling windows and their target vectors consisting of midprice, bid and ask expectations and variances. The number of times where a rolling window has its target's information is 157 (0.17%), out of which 119 are due to forward filling (0.13%).</p>
+<p>In total we have 90797 rolling windows and their target vectors consisting of midprice, bid and ask expectations and variances. The number of windows including its target's information is 146 (~ 0.16%), out of which 116 are due to forward filling (~ 0.13%).</p>
+<p>Below we have the dates and times of forward filled entries:</p>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ffill_dict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">STOCKS_DIR</span><span class="o">+</span><span class="sa">f</span><span class="s1">&#39;/GARAN/</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">allow_pickle</span><span class="o">=</span><span class="s1">&#39;TRUE&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">data</span> <span class="o">!=</span> <span class="p">[]:</span>
+        <span class="n">ffill_dict</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">filename</span><span class="p">[</span><span class="mi">14</span><span class="p">:</span><span class="o">-</span><span class="mi">4</span><span class="p">]:</span> <span class="n">data</span><span class="p">})</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">ffill_dict</span><span class="p">,</span><span class="s1">&#39;index&#39;</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[15]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2017-01-02</th>
+      <td>16:42</td>
+      <td>16:43</td>
+      <td>16:55</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-02-16</th>
+      <td>12:48</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-03-10</th>
+      <td>12:43</td>
+      <td>14:04</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-03-15</th>
+      <td>14:27</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-03-20</th>
+      <td>12:08</td>
+      <td>12:30</td>
+      <td>12:34</td>
+      <td>12:45</td>
+      <td>12:46</td>
+      <td>12:47</td>
+      <td>14:23</td>
+      <td>15:17</td>
+      <td>15:32</td>
+      <td>15:33</td>
+      <td>16:23</td>
+      <td>16:36</td>
+      <td>16:44</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-03-22</th>
+      <td>15:53</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-03-24</th>
+      <td>10:42</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-03-28</th>
+      <td>11:16</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-03-30</th>
+      <td>12:44</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-04-03</th>
+      <td>11:57</td>
+      <td>12:02</td>
+      <td>12:14</td>
+      <td>12:20</td>
+      <td>12:38</td>
+      <td>12:52</td>
+      <td>16:23</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-04-04</th>
+      <td>11:16</td>
+      <td>12:46</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-04-05</th>
+      <td>12:43</td>
+      <td>12:51</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-04-14</th>
+      <td>10:59</td>
+      <td>12:17</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-05-29</th>
+      <td>12:42</td>
+      <td>12:50</td>
+      <td>12:56</td>
+      <td>16:53</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-06-05</th>
+      <td>14:40</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-06-09</th>
+      <td>12:18</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-06-20</th>
+      <td>12:51</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-06-22</th>
+      <td>16:14</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-07-18</th>
+      <td>12:41</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-07-25</th>
+      <td>17:25</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-07-26</th>
+      <td>15:45</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-08-03</th>
+      <td>14:27</td>
+      <td>15:43</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-08-07</th>
+      <td>12:43</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-08-10</th>
+      <td>14:44</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-08-11</th>
+      <td>12:43</td>
+      <td>14:20</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-08-14</th>
+      <td>11:44</td>
+      <td>12:49</td>
+      <td>12:50</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-08-23</th>
+      <td>12:45</td>
+      <td>14:58</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-08-28</th>
+      <td>10:58</td>
+      <td>11:14</td>
+      <td>11:18</td>
+      <td>11:38</td>
+      <td>12:39</td>
+      <td>14:29</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-08-29</th>
+      <td>12:22</td>
+      <td>12:43</td>
+      <td>12:44</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-09-08</th>
+      <td>12:58</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-09-13</th>
+      <td>15:17</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-09-15</th>
+      <td>11:37</td>
+      <td>12:07</td>
+      <td>12:41</td>
+      <td>12:43</td>
+      <td>14:45</td>
+      <td>14:47</td>
+      <td>14:49</td>
+      <td>15:12</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-09-19</th>
+      <td>12:19</td>
+      <td>12:35</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-09-25</th>
+      <td>16:39</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-10-02</th>
+      <td>17:43</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-10-03</th>
+      <td>16:19</td>
+      <td>16:35</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-10-04</th>
+      <td>12:36</td>
+      <td>12:47</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-10-05</th>
+      <td>12:23</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-10-13</th>
+      <td>11:59</td>
+      <td>15:12</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-11-02</th>
+      <td>12:42</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-11-06</th>
+      <td>15:49</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-12-25</th>
+      <td>12:19</td>
+      <td>12:20</td>
+      <td>14:39</td>
+      <td>14:52</td>
+      <td>14:54</td>
+      <td>15:04</td>
+      <td>15:14</td>
+      <td>15:15</td>
+      <td>15:23</td>
+      <td>15:25</td>
+      <td>16:02</td>
+      <td>16:48</td>
+      <td>17:04</td>
+      <td>17:16</td>
+      <td>17:22</td>
+    </tr>
+    <tr>
+      <th>2017-12-26</th>
+      <td>12:45</td>
+      <td>12:46</td>
+      <td>12:48</td>
+      <td>12:57</td>
+      <td>14:08</td>
+      <td>14:58</td>
+      <td>15:43</td>
+      <td>16:40</td>
+      <td>16:48</td>
+      <td>16:51</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-12-27</th>
+      <td>11:55</td>
+      <td>14:38</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2017-12-28</th>
+      <td>11:49</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
     </div>
   </div>
