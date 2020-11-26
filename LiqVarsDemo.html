@@ -13107,7 +13107,10 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="We-have-Limit-Order-Books-of-the-stock-GARAN-for-the-trading-days-in-2017.-Using-bid-and-ask-prices-and-volumes-at-different-levels-in-the-order-book,-we-are-interested-in-calculating-the-following-liquidity-measures-for-every-minute-interval,-denoted-by-superscript-k:">We have Limit Order Books of the stock GARAN for the trading days in 2017. Using bid and ask prices and volumes at different levels in the order book, we are interested in calculating the following liquidity measures for every minute interval, denoted by superscript k:<a class="anchor-link" href="#We-have-Limit-Order-Books-of-the-stock-GARAN-for-the-trading-days-in-2017.-Using-bid-and-ask-prices-and-volumes-at-different-levels-in-the-order-book,-we-are-interested-in-calculating-the-following-liquidity-measures-for-every-minute-interval,-denoted-by-superscript-k:">&#182;</a></h3><h4 id="i)-Average-$i^{th}$-level-bid-depth:-$\text{$\bf-ABD$}^k_i$">i) Average $i^{th}$ level bid depth: $\text{$\bf ABD$}^k_i$<a class="anchor-link" href="#i)-Average-$i^{th}$-level-bid-depth:-$\text{$\bf-ABD$}^k_i$">&#182;</a></h4><p>$= mean( ( \sum^i_{j=1} \text{bsize}^k_{j,1},...,\sum^i_{j=1}\text{bsize}^k_{j,|\tau_k|}) )$</p>
+<h3 id="We-have-Limit-Order-Books-of-the-stock-GARAN-for-the-trading-days-in-2017.-Using-bid-and-ask-prices-and-volumes-at-different-levels-in-the-order-book,-we-are-interested-in-calculating-the-following-liquidity-measures-for-every-minute-interval,-denoted-by-superscript-k.-Note-that-we-are-using-a-custom-mean-function-defined-as:">We have Limit Order Books of the stock GARAN for the trading days in 2017. Using bid and ask prices and volumes at different levels in the order book, we are interested in calculating the following liquidity measures for every minute interval, denoted by superscript k. Note that we are using a custom mean function defined as:<a class="anchor-link" href="#We-have-Limit-Order-Books-of-the-stock-GARAN-for-the-trading-days-in-2017.-Using-bid-and-ask-prices-and-volumes-at-different-levels-in-the-order-book,-we-are-interested-in-calculating-the-following-liquidity-measures-for-every-minute-interval,-denoted-by-superscript-k.-Note-that-we-are-using-a-custom-mean-function-defined-as:">&#182;</a></h3><ul>
+<li>$mean(\vec{\textbf{x}}) := \frac { \sum_{j=1}^{dim(\vec{\textbf{x}})} x_{j} } {dim(\vec{\textbf{x}})} $</li>
+</ul>
+<h4 id="i)-Average-$i^{th}$-level-bid-depth:-$\text{$\bf-ABD$}^k_i$">i) Average $i^{th}$ level bid depth: $\text{$\bf ABD$}^k_i$<a class="anchor-link" href="#i)-Average-$i^{th}$-level-bid-depth:-$\text{$\bf-ABD$}^k_i$">&#182;</a></h4><p>$= mean( ( \sum^i_{j=1} \text{bsize}^k_{j,1},...,\sum^i_{j=1}\text{bsize}^k_{j,|\tau_k|}) )$</p>
 <h4 id="ii)-Average-$i^{th}$-level-bid-TL-depth:-$\text{$\bf-WABD$}^k_i$">ii) Average $i^{th}$ level bid TL depth: $\text{$\bf WABD$}^k_i$<a class="anchor-link" href="#ii)-Average-$i^{th}$-level-bid-TL-depth:-$\text{$\bf-WABD$}^k_i$">&#182;</a></h4><p>$= mean( ( \sum^i_{j=1} \text{bid}^k_{j,1} \cdot \text{bsize}^k_{j,1},...,\sum^i_{j=1} \text{bid}^k_{j,|\tau_k|} \cdot \text{bsize}^k_{j,|\tau_k|}) )$</p>
 <h4 id="iii)Average-$i^{th}$-level-ask-depth:-$\text{$\bf-AAD$}^k_i$">iii)Average $i^{th}$ level ask depth: $\text{$\bf AAD$}^k_i$<a class="anchor-link" href="#iii)Average-$i^{th}$-level-ask-depth:-$\text{$\bf-AAD$}^k_i$">&#182;</a></h4><p>$= mean( ( \sum^i_{j=1} \text{asize}^k_{j,1},...,\sum^i_{j=1}\text{asize}^k_{j,|\tau_k|}) )$</p>
 <h4 id="iv)-Average-$i^{th}$-level-ask-TL-depth:-$\text{$\bf-WAAD$}^k_i$">iv) Average $i^{th}$ level ask TL depth: $\text{$\bf WAAD$}^k_i$<a class="anchor-link" href="#iv)-Average-$i^{th}$-level-ask-TL-depth:-$\text{$\bf-WAAD$}^k_i$">&#182;</a></h4><p>$= mean( ( \sum^i_{j=1} \text{ask}^k_{j,1} \cdot \text{asize}^k_{j,1},...,\sum^i_{j=1} \text{ask}^k_{j,|\tau_k|} \cdot \text{asize}^k_{j,|\tau_k|}) )$</p>
@@ -13120,8 +13123,6 @@ div#notebook {
 <li><p>$\tau_k= \{ \text{entry times in LOB which are inside the $k^{th}$ minute interval} \} $</p>
 </li>
 <li><p>$observable^{k}_{j,l}$ : $l^{th}$ value of the observable's values inside the $k^{th}$ minute interval at level $j$</p>
-</li>
-<li><p>$mean(\vec{\textbf{x}}) := \frac { \sum_{j=1}^{dim(\vec{\textbf{x}})} x_{j} } {dim(\vec{\textbf{x}})} $</p>
 </li>
 </ul>
 
@@ -13925,10 +13926,10 @@ div#notebook {
 
  
  
-<div id="db815dc7-3666-4213-b503-babcf368bc1f"></div>
+<div id="dd86d16e-f765-4b25-b00e-d6b9f33c7d45"></div>
 <div class="output_subarea output_widget_view ">
 <script type="text/javascript">
-var element = $('#db815dc7-3666-4213-b503-babcf368bc1f');
+var element = $('#dd86d16e-f765-4b25-b00e-d6b9f33c7d45');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
 {"model_id": "de335674e34541e5bea902ff6361c779", "version_major": 2, "version_minor": 0}
@@ -13958,10 +13959,10 @@ var element = $('#db815dc7-3666-4213-b503-babcf368bc1f');
 
  
  
-<div id="df259cb9-e48c-4e84-a4bc-eab90a2f78e4"></div>
+<div id="e91b78b2-69de-4267-af62-18239b7a4361"></div>
 <div class="output_subarea output_widget_view ">
 <script type="text/javascript">
-var element = $('#df259cb9-e48c-4e84-a4bc-eab90a2f78e4');
+var element = $('#e91b78b2-69de-4267-af62-18239b7a4361');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
 {"model_id": "33b299b144844836b311f3b766b8aac3", "version_major": 2, "version_minor": 0}
