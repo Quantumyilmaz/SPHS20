@@ -13547,7 +13547,7 @@ First, we take the corresponding entries in the trade book for Jan 2nd and make 
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 1912/1912 [00:07&lt;00:00, 251.75it/s]
+<pre>100%|██████████| 1912/1912 [00:08&lt;00:00, 224.96it/s]
 </pre>
 </div>
 </div>
@@ -13704,8 +13704,8 @@ First, we take the corresponding entries in the trade book for Jan 2nd and make 
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 180/180 [00:00&lt;00:00, 719.72it/s]
-100%|██████████| 237/237 [00:00&lt;00:00, 541.42it/s]
+<pre>100%|██████████| 180/180 [00:00&lt;00:00, 648.16it/s]
+100%|██████████| 237/237 [00:00&lt;00:00, 479.10it/s]
 </pre>
 </div>
 </div>
@@ -14449,8 +14449,8 @@ First, we take the corresponding entries in the trade book for Jan 2nd and make 
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 20/20 [00:06&lt;00:00,  2.90it/s]
-100%|██████████| 417/417 [00:20&lt;00:00, 20.35it/s]
+<pre>100%|██████████| 20/20 [00:07&lt;00:00,  2.52it/s]
+100%|██████████| 417/417 [00:26&lt;00:00, 15.45it/s]
 </pre>
 </div>
 </div>
@@ -15198,7 +15198,7 @@ normalized by the total volume on their respective side at each row. The time in
 <p>The quantities we would like to forecast are the midprice and expectation and variance of prices of the following minute of each rolling window. This would result in vector with a length of 5, since expectation and variance are calculated for both ask and bid side seperately.</p>
 <p>Note that a day with 420 minute entries would result in a set of 360 rolling windows and not 361, since the last entry of the day is to be forecast.</p>
 <h2 id="Batches">Batches<a class="anchor-link" href="#Batches">&#182;</a></h2><p>Our model accepts a rolling window of 60 minutes as input, which corresponds to a tensor with shape (60, no. of features), where the features could be normalized time of entry, prices, volumes and the liquidity measures.</p>
-<p>We can decide how many days one batch will consist of, for both training and validation batches. Our batch size would be then the total number of rolling windows of all days. This is demonstrated below, where we have chosen the number of training and validation days to be 10 and 2 respectively:</p>
+<p>We can decide how many days one batch will consist of, for both training and validation batches. Our batch size would be then the total number of rolling windows of all days in the batch. This is demonstrated below, where we have chosen the number of training and validation days to be 10 and 2 respectively:</p>
 
 </div>
 </div>
@@ -15210,6 +15210,11 @@ normalized by the total volume on their respective side at each row. The time in
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">torchsummary</span> <span class="kn">import</span> <span class="n">summary</span>
 <span class="kn">from</span> <span class="nn">train</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">cfg</span><span class="o">.</span><span class="n">TRAIN</span><span class="o">.</span><span class="n">BATCH_SIZE</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">cfg</span><span class="o">.</span><span class="n">TRAIN</span><span class="o">.</span><span class="n">VAL_BATCH_SIZE</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">cfg</span><span class="o">.</span><span class="n">LOB</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">cfg</span><span class="o">.</span><span class="n">LIQ_VARS</span> <span class="o">=</span> <span class="kc">False</span>
 
 <span class="n">train_dataloader</span> <span class="p">,</span> <span class="n">val_dataloader</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">()</span>
 
@@ -15254,20 +15259,20 @@ normalized by the total volume on their respective side at each row. The time in
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>No of days in training batch: 1
- No of days in validation batch: 1
+<pre>No of days in training batch: 10
+ No of days in validation batch: 2
 
 Shapes for one batch: 
 
  TRAIN:
- training data input shape: (360, 60, 21) training data output shape: (360, 5) 
+ training data input shape: (3600, 60, 21) training data output shape: (3600, 5) 
  VALIDATION:
- validation data input shape: (360, 60, 21) validation data output shape: (360, 5)
+ validation data input shape: (720, 60, 21) validation data output shape: (720, 5)
 
 Loading model with one hidden layer.
 
-Model output shape for input shape (360, 60, 21):       
- (360, 5)
+Model output shape for input shape (3600, 60, 21):       
+ (3600, 5)
 ----------------------------------------------------------------
         Layer (type)               Output Shape         Param #
 ================================================================
@@ -15403,7 +15408,7 @@ Variance of price:  0.00020112967295652843
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Due to forward filling it will happen that information at the last minute of a rollling window is the same as the next minute's information, which would mean that the target data's information is present in that window. This is the case for the forward fills that take place after the first 60 entries of a day.</p>
+<p>Due to forward filling it will happen that information at the last minute of a rollling window is the same as the next minute's information, which would mean that the target data's information is present in that window. This is the case for the forward fills that take place after the first hour, i.e. the first 60 entries of a day.</p>
 <p>Another reason for the window to possess its target could simply be that some entries in the LOB stay unchanged or reoccur at certain points.</p>
 <p>We now check every rolling window whether it includes its target. While doing that, we also make sure that the next window's last entry has the information of the current window's target.</p>
 <p>Here we also made sure that no error occurs due to floating point precision while changing between lists, numpy arrays and pytorch tensors.</p>
@@ -15420,6 +15425,11 @@ Variance of price:  0.00020112967295652843
 <span class="kn">from</span> <span class="nn">train</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">tqdm.notebook</span> <span class="kn">import</span> <span class="n">tqdm</span>
 <span class="n">cfg</span><span class="o">.</span><span class="n">TRAIN</span><span class="o">.</span><span class="n">SPLIT_RATIO</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">cfg</span><span class="o">.</span><span class="n">TRAIN</span><span class="o">.</span><span class="n">BATCH_SIZE</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">cfg</span><span class="o">.</span><span class="n">TRAIN</span><span class="o">.</span><span class="n">VAL_BATCH_SIZE</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">cfg</span><span class="o">.</span><span class="n">LOB</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">cfg</span><span class="o">.</span><span class="n">LIQ_VARS</span> <span class="o">=</span> <span class="kc">False</span>
+
 <span class="n">filenames</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">STOCKS_DIR</span><span class="o">+</span><span class="sa">f</span><span class="s1">&#39;/GARAN/&#39;</span><span class="p">)</span>
 <span class="p">[</span><span class="n">filenames</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">filenames</span><span class="p">)</span> <span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">!=</span><span class="s1">&#39;npy&#39;</span><span class="p">]</span>
 <span class="n">filenames</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">filenames</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;midprices.npy&#39;</span><span class="p">))</span>
@@ -15480,6 +15490,7 @@ Variance of price:  0.00020112967295652843
 <span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="n">liste</span><span class="p">):</span> 
     <span class="n">liste</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">liste</span>
+
 <span class="k">for</span> <span class="n">a</span><span class="p">,</span><span class="n">filename</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">filenames</span><span class="p">),</span><span class="n">total</span><span class="o">=</span><span class="mi">253</span><span class="p">):</span>
 <span class="c1">#     ffills = np.load(cfg.STOCKS_DIR+f&#39;/GARAN/{filename}&#39;,allow_pickle=&#39;TRUE&#39;).item()[&#39;index&#39;]</span>
 <span class="c1">#     assert [sort(list(set(sum(k)+1 for k in due_to_ffill[i]))) for i in due_to_ffill][a]==ffills or [59,74,166].count(a),a</span>
@@ -15519,13 +15530,13 @@ Variance of price:  0.00020112967295652843
 
  
  
-<div id="52e85f62-717b-42ea-b03e-05ba3a8f2c28"></div>
+<div id="f7b949b7-e38d-429d-873e-26ccdb176a60"></div>
 <div class="output_subarea output_widget_view ">
 <script type="text/javascript">
-var element = $('#52e85f62-717b-42ea-b03e-05ba3a8f2c28');
+var element = $('#f7b949b7-e38d-429d-873e-26ccdb176a60');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "ce417cde9b874b4c8989674d6dec5453", "version_major": 2, "version_minor": 0}
+{"model_id": "3c873a76ce1b405daaa6ddc7b000cdbe", "version_major": 2, "version_minor": 0}
 </script>
 </div>
 
@@ -15552,13 +15563,13 @@ var element = $('#52e85f62-717b-42ea-b03e-05ba3a8f2c28');
 
  
  
-<div id="1a9f113a-20da-413e-b2c9-612158105c4c"></div>
+<div id="b5a2357c-cb0d-4510-86ea-2c67d741b0dd"></div>
 <div class="output_subarea output_widget_view ">
 <script type="text/javascript">
-var element = $('#1a9f113a-20da-413e-b2c9-612158105c4c');
+var element = $('#b5a2357c-cb0d-4510-86ea-2c67d741b0dd');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "3162bba35de541cd88793263b2e6228b", "version_major": 2, "version_minor": 0}
+{"model_id": "1a2dad77c06e4ca08ca563c0907acf9c", "version_major": 2, "version_minor": 0}
 </script>
 </div>
 
@@ -15587,7 +15598,8 @@ Total incidence of target inclusion: 0.16079826425983237%
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In total we have 90797 rolling windows and their target vectors consisting of midprice, bid and ask expectations and variances. The number of windows including its target's information is 146 (~ 0.16%), out of which 116 are due to forward filling (~ 0.13%).</p>
-<p>Below we have the dates and times of forward filled entries:</p>
+<p>Here we do not count the number of times when the target is inside its window but only the number of windows including its target. The two are different since there are consecutive forward fills and therefore some windows will be including its target multiple times in multiple entries.</p>
+<p>Below we have the dates and times of forward filled entries, where the consecutive forward fills can be seen as well:</p>
 
 </div>
 </div>
