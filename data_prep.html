@@ -13547,7 +13547,7 @@ First, we take the corresponding entries in the trade book for Jan 2nd and make 
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 1912/1912 [00:07&lt;00:00, 242.71it/s]
+<pre>100%|██████████| 1912/1912 [00:08&lt;00:00, 234.86it/s]
 </pre>
 </div>
 </div>
@@ -13704,8 +13704,8 @@ First, we take the corresponding entries in the trade book for Jan 2nd and make 
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 180/180 [00:00&lt;00:00, 693.08it/s]
-100%|██████████| 237/237 [00:00&lt;00:00, 512.25it/s]
+<pre>100%|██████████| 180/180 [00:00&lt;00:00, 698.05it/s]
+100%|██████████| 237/237 [00:00&lt;00:00, 499.18it/s]
 </pre>
 </div>
 </div>
@@ -14449,8 +14449,8 @@ First, we take the corresponding entries in the trade book for Jan 2nd and make 
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 20/20 [00:06&lt;00:00,  2.90it/s]
-100%|██████████| 417/417 [00:22&lt;00:00, 18.64it/s]
+<pre>100%|██████████| 20/20 [00:07&lt;00:00,  2.55it/s]
+100%|██████████| 417/417 [00:20&lt;00:00, 20.00it/s]
 </pre>
 </div>
 </div>
@@ -15529,13 +15529,13 @@ Variance of price:  0.00020112967295652843
 
  
  
-<div id="01b36273-12e9-4d04-a558-f0ff51d747e0"></div>
+<div id="39972a4b-0f7b-42a4-8792-3ade7beb8d37"></div>
 <div class="output_subarea output_widget_view ">
 <script type="text/javascript">
-var element = $('#01b36273-12e9-4d04-a558-f0ff51d747e0');
+var element = $('#39972a4b-0f7b-42a4-8792-3ade7beb8d37');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "247eacbc03a84e71844d37a1c65c3590", "version_major": 2, "version_minor": 0}
+{"model_id": "4e3dc8970302431cbf60a8bd72f5a813", "version_major": 2, "version_minor": 0}
 </script>
 </div>
 
@@ -15562,13 +15562,13 @@ var element = $('#01b36273-12e9-4d04-a558-f0ff51d747e0');
 
  
  
-<div id="83238c4c-bf4e-434f-8d5f-fd4813710ada"></div>
+<div id="9e64bbba-d86d-408b-b35f-bb00be1ac924"></div>
 <div class="output_subarea output_widget_view ">
 <script type="text/javascript">
-var element = $('#83238c4c-bf4e-434f-8d5f-fd4813710ada');
+var element = $('#9e64bbba-d86d-408b-b35f-bb00be1ac924');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "1a1b75e858a24f8898d610958a66552b", "version_major": 2, "version_minor": 0}
+{"model_id": "a9f40944266e441b913b6d2e36d0499a", "version_major": 2, "version_minor": 0}
 </script>
 </div>
 
@@ -15598,7 +15598,7 @@ Total incidence of target inclusion: 0.16079826425983237%
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In total we have 90797 rolling windows and their target vectors consisting of midprice, bid and ask expectations and variances. The number of windows including its target's information is 146 (~ 0.16%), out of which 116 are due to forward filling (~ 0.13%).</p>
 <p>Here we do not count the number of times when the target is inside its window but only the number of windows including its target. The two are different since there are consecutive forward fills and therefore some windows will be including its target multiple times in multiple entries.</p>
-<p>Below we have the dates and times of forward filled entries, where the consecutive forward fills can be seen as well:</p>
+<p>Below we have the dates and times of forward filled entries, where the consecutive forward fills are highlighted:</p>
 
 </div>
 </div>
@@ -15609,11 +15609,19 @@ Total incidence of target inclusion: 0.16079826425983237%
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">ffill_dict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">def</span> <span class="nf">highlight</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">indices</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">x_</span> <span class="o">=</span> <span class="p">[</span><span class="n">make_clock</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span> <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">get_time_inbetween</span><span class="p">(</span><span class="n">x_</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">x_</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;m&#39;</span><span class="p">)</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">indices</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;background-color: lightgreen&#39;</span> <span class="k">if</span> <span class="n">indices</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))]</span>
+
 <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">:</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">STOCKS_DIR</span><span class="o">+</span><span class="sa">f</span><span class="s1">&#39;/GARAN/</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">allow_pickle</span><span class="o">=</span><span class="s1">&#39;TRUE&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">data</span> <span class="o">!=</span> <span class="p">[]:</span>
         <span class="n">ffill_dict</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">filename</span><span class="p">[</span><span class="mi">14</span><span class="p">:</span><span class="o">-</span><span class="mi">4</span><span class="p">]:</span> <span class="n">data</span><span class="p">})</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">ffill_dict</span><span class="p">,</span><span class="s1">&#39;index&#39;</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">ffill_dict</span><span class="p">,</span><span class="s1">&#39;index&#39;</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">16</span><span class="p">))</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">highlight</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -15631,855 +15639,853 @@ Total incidence of target inclusion: 0.16079826425983237%
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2017-01-02</th>
-      <td>16:42</td>
-      <td>16:43</td>
-      <td>16:55</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-02-16</th>
-      <td>12:48</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-03-10</th>
-      <td>12:43</td>
-      <td>14:04</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-03-15</th>
-      <td>14:27</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-03-20</th>
-      <td>12:08</td>
-      <td>12:30</td>
-      <td>12:34</td>
-      <td>12:45</td>
-      <td>12:46</td>
-      <td>12:47</td>
-      <td>14:23</td>
-      <td>15:17</td>
-      <td>15:32</td>
-      <td>15:33</td>
-      <td>16:23</td>
-      <td>16:36</td>
-      <td>16:44</td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-03-22</th>
-      <td>15:53</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-03-24</th>
-      <td>10:42</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-03-28</th>
-      <td>11:16</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-03-30</th>
-      <td>12:44</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-04-03</th>
-      <td>11:57</td>
-      <td>12:02</td>
-      <td>12:14</td>
-      <td>12:20</td>
-      <td>12:38</td>
-      <td>12:52</td>
-      <td>16:23</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-04-04</th>
-      <td>11:16</td>
-      <td>12:46</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-04-05</th>
-      <td>12:43</td>
-      <td>12:51</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-04-14</th>
-      <td>10:59</td>
-      <td>12:17</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-05-29</th>
-      <td>12:42</td>
-      <td>12:50</td>
-      <td>12:56</td>
-      <td>16:53</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-06-05</th>
-      <td>14:40</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-06-09</th>
-      <td>12:18</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-06-20</th>
-      <td>12:51</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-06-22</th>
-      <td>16:14</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-07-18</th>
-      <td>12:41</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-07-25</th>
-      <td>17:25</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-07-26</th>
-      <td>15:45</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-08-03</th>
-      <td>14:27</td>
-      <td>15:43</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-08-07</th>
-      <td>12:43</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-08-10</th>
-      <td>14:44</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-08-11</th>
-      <td>12:43</td>
-      <td>14:20</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-08-14</th>
-      <td>11:44</td>
-      <td>12:49</td>
-      <td>12:50</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-08-23</th>
-      <td>12:45</td>
-      <td>14:58</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-08-28</th>
-      <td>10:58</td>
-      <td>11:14</td>
-      <td>11:18</td>
-      <td>11:38</td>
-      <td>12:39</td>
-      <td>14:29</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-08-29</th>
-      <td>12:22</td>
-      <td>12:43</td>
-      <td>12:44</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-09-08</th>
-      <td>12:58</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-09-13</th>
-      <td>15:17</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-09-15</th>
-      <td>11:37</td>
-      <td>12:07</td>
-      <td>12:41</td>
-      <td>12:43</td>
-      <td>14:45</td>
-      <td>14:47</td>
-      <td>14:49</td>
-      <td>15:12</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-09-19</th>
-      <td>12:19</td>
-      <td>12:35</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-09-25</th>
-      <td>16:39</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-10-02</th>
-      <td>17:43</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-10-03</th>
-      <td>16:19</td>
-      <td>16:35</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-10-04</th>
-      <td>12:36</td>
-      <td>12:47</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-10-05</th>
-      <td>12:23</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-10-13</th>
-      <td>11:59</td>
-      <td>15:12</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-11-02</th>
-      <td>12:42</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-11-06</th>
-      <td>15:49</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-12-25</th>
-      <td>12:19</td>
-      <td>12:20</td>
-      <td>14:39</td>
-      <td>14:52</td>
-      <td>14:54</td>
-      <td>15:04</td>
-      <td>15:14</td>
-      <td>15:15</td>
-      <td>15:23</td>
-      <td>15:25</td>
-      <td>16:02</td>
-      <td>16:48</td>
-      <td>17:04</td>
-      <td>17:16</td>
-      <td>17:22</td>
-    </tr>
-    <tr>
-      <th>2017-12-26</th>
-      <td>12:45</td>
-      <td>12:46</td>
-      <td>12:48</td>
-      <td>12:57</td>
-      <td>14:08</td>
-      <td>14:58</td>
-      <td>15:43</td>
-      <td>16:40</td>
-      <td>16:48</td>
-      <td>16:51</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-12-27</th>
-      <td>11:55</td>
-      <td>14:38</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2017-12-28</th>
-      <td>11:49</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
-</div>
+<style  type="text/css" >
+    #T_a8721fe4_318b_11eb_a19f_acde48001122row0_col0 {
+            background-color:  lightgreen;
+        }    #T_a8721fe4_318b_11eb_a19f_acde48001122row0_col1 {
+            background-color:  lightgreen;
+        }    #T_a8721fe4_318b_11eb_a19f_acde48001122row4_col3 {
+            background-color:  lightgreen;
+        }    #T_a8721fe4_318b_11eb_a19f_acde48001122row4_col4 {
+            background-color:  lightgreen;
+        }    #T_a8721fe4_318b_11eb_a19f_acde48001122row4_col5 {
+            background-color:  lightgreen;
+        }    #T_a8721fe4_318b_11eb_a19f_acde48001122row4_col8 {
+            background-color:  lightgreen;
+        }    #T_a8721fe4_318b_11eb_a19f_acde48001122row4_col9 {
+            background-color:  lightgreen;
+        }    #T_a8721fe4_318b_11eb_a19f_acde48001122row25_col1 {
+            background-color:  lightgreen;
+        }    #T_a8721fe4_318b_11eb_a19f_acde48001122row25_col2 {
+            background-color:  lightgreen;
+        }    #T_a8721fe4_318b_11eb_a19f_acde48001122row28_col1 {
+            background-color:  lightgreen;
+        }    #T_a8721fe4_318b_11eb_a19f_acde48001122row28_col2 {
+            background-color:  lightgreen;
+        }    #T_a8721fe4_318b_11eb_a19f_acde48001122row41_col0 {
+            background-color:  lightgreen;
+        }    #T_a8721fe4_318b_11eb_a19f_acde48001122row41_col1 {
+            background-color:  lightgreen;
+        }    #T_a8721fe4_318b_11eb_a19f_acde48001122row41_col6 {
+            background-color:  lightgreen;
+        }    #T_a8721fe4_318b_11eb_a19f_acde48001122row41_col7 {
+            background-color:  lightgreen;
+        }    #T_a8721fe4_318b_11eb_a19f_acde48001122row42_col0 {
+            background-color:  lightgreen;
+        }    #T_a8721fe4_318b_11eb_a19f_acde48001122row42_col1 {
+            background-color:  lightgreen;
+        }</style><table id="T_a8721fe4_318b_11eb_a19f_acde48001122" ><thead>    <tr>        <th class="blank level0" ></th>        <th class="col_heading level0 col0" >1</th>        <th class="col_heading level0 col1" >2</th>        <th class="col_heading level0 col2" >3</th>        <th class="col_heading level0 col3" >4</th>        <th class="col_heading level0 col4" >5</th>        <th class="col_heading level0 col5" >6</th>        <th class="col_heading level0 col6" >7</th>        <th class="col_heading level0 col7" >8</th>        <th class="col_heading level0 col8" >9</th>        <th class="col_heading level0 col9" >10</th>        <th class="col_heading level0 col10" >11</th>        <th class="col_heading level0 col11" >12</th>        <th class="col_heading level0 col12" >13</th>        <th class="col_heading level0 col13" >14</th>        <th class="col_heading level0 col14" >15</th>    </tr></thead><tbody>
+                <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row0" class="row_heading level0 row0" >2017-01-02</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row0_col0" class="data row0 col0" >16:42</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row0_col1" class="data row0 col1" >16:43</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row0_col2" class="data row0 col2" >16:55</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row0_col3" class="data row0 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row0_col4" class="data row0 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row0_col5" class="data row0 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row0_col6" class="data row0 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row0_col7" class="data row0 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row0_col8" class="data row0 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row0_col9" class="data row0 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row0_col10" class="data row0 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row0_col11" class="data row0 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row0_col12" class="data row0 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row0_col13" class="data row0 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row0_col14" class="data row0 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row1" class="row_heading level0 row1" >2017-02-16</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row1_col0" class="data row1 col0" >12:48</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row1_col1" class="data row1 col1" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row1_col2" class="data row1 col2" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row1_col3" class="data row1 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row1_col4" class="data row1 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row1_col5" class="data row1 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row1_col6" class="data row1 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row1_col7" class="data row1 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row1_col8" class="data row1 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row1_col9" class="data row1 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row1_col10" class="data row1 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row1_col11" class="data row1 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row1_col12" class="data row1 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row1_col13" class="data row1 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row1_col14" class="data row1 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row2" class="row_heading level0 row2" >2017-03-10</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row2_col0" class="data row2 col0" >12:43</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row2_col1" class="data row2 col1" >14:04</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row2_col2" class="data row2 col2" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row2_col3" class="data row2 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row2_col4" class="data row2 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row2_col5" class="data row2 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row2_col6" class="data row2 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row2_col7" class="data row2 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row2_col8" class="data row2 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row2_col9" class="data row2 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row2_col10" class="data row2 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row2_col11" class="data row2 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row2_col12" class="data row2 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row2_col13" class="data row2 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row2_col14" class="data row2 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row3" class="row_heading level0 row3" >2017-03-15</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row3_col0" class="data row3 col0" >14:27</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row3_col1" class="data row3 col1" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row3_col2" class="data row3 col2" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row3_col3" class="data row3 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row3_col4" class="data row3 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row3_col5" class="data row3 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row3_col6" class="data row3 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row3_col7" class="data row3 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row3_col8" class="data row3 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row3_col9" class="data row3 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row3_col10" class="data row3 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row3_col11" class="data row3 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row3_col12" class="data row3 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row3_col13" class="data row3 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row3_col14" class="data row3 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row4" class="row_heading level0 row4" >2017-03-20</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row4_col0" class="data row4 col0" >12:08</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row4_col1" class="data row4 col1" >12:30</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row4_col2" class="data row4 col2" >12:34</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row4_col3" class="data row4 col3" >12:45</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row4_col4" class="data row4 col4" >12:46</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row4_col5" class="data row4 col5" >12:47</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row4_col6" class="data row4 col6" >14:23</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row4_col7" class="data row4 col7" >15:17</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row4_col8" class="data row4 col8" >15:32</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row4_col9" class="data row4 col9" >15:33</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row4_col10" class="data row4 col10" >16:23</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row4_col11" class="data row4 col11" >16:36</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row4_col12" class="data row4 col12" >16:44</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row4_col13" class="data row4 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row4_col14" class="data row4 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row5" class="row_heading level0 row5" >2017-03-22</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row5_col0" class="data row5 col0" >15:53</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row5_col1" class="data row5 col1" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row5_col2" class="data row5 col2" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row5_col3" class="data row5 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row5_col4" class="data row5 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row5_col5" class="data row5 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row5_col6" class="data row5 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row5_col7" class="data row5 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row5_col8" class="data row5 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row5_col9" class="data row5 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row5_col10" class="data row5 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row5_col11" class="data row5 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row5_col12" class="data row5 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row5_col13" class="data row5 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row5_col14" class="data row5 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row6" class="row_heading level0 row6" >2017-03-24</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row6_col0" class="data row6 col0" >10:42</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row6_col1" class="data row6 col1" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row6_col2" class="data row6 col2" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row6_col3" class="data row6 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row6_col4" class="data row6 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row6_col5" class="data row6 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row6_col6" class="data row6 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row6_col7" class="data row6 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row6_col8" class="data row6 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row6_col9" class="data row6 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row6_col10" class="data row6 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row6_col11" class="data row6 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row6_col12" class="data row6 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row6_col13" class="data row6 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row6_col14" class="data row6 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row7" class="row_heading level0 row7" >2017-03-28</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row7_col0" class="data row7 col0" >11:16</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row7_col1" class="data row7 col1" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row7_col2" class="data row7 col2" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row7_col3" class="data row7 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row7_col4" class="data row7 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row7_col5" class="data row7 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row7_col6" class="data row7 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row7_col7" class="data row7 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row7_col8" class="data row7 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row7_col9" class="data row7 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row7_col10" class="data row7 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row7_col11" class="data row7 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row7_col12" class="data row7 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row7_col13" class="data row7 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row7_col14" class="data row7 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row8" class="row_heading level0 row8" >2017-03-30</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row8_col0" class="data row8 col0" >12:44</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row8_col1" class="data row8 col1" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row8_col2" class="data row8 col2" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row8_col3" class="data row8 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row8_col4" class="data row8 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row8_col5" class="data row8 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row8_col6" class="data row8 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row8_col7" class="data row8 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row8_col8" class="data row8 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row8_col9" class="data row8 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row8_col10" class="data row8 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row8_col11" class="data row8 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row8_col12" class="data row8 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row8_col13" class="data row8 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row8_col14" class="data row8 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row9" class="row_heading level0 row9" >2017-04-03</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row9_col0" class="data row9 col0" >11:57</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row9_col1" class="data row9 col1" >12:02</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row9_col2" class="data row9 col2" >12:14</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row9_col3" class="data row9 col3" >12:20</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row9_col4" class="data row9 col4" >12:38</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row9_col5" class="data row9 col5" >12:52</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row9_col6" class="data row9 col6" >16:23</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row9_col7" class="data row9 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row9_col8" class="data row9 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row9_col9" class="data row9 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row9_col10" class="data row9 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row9_col11" class="data row9 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row9_col12" class="data row9 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row9_col13" class="data row9 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row9_col14" class="data row9 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row10" class="row_heading level0 row10" >2017-04-04</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row10_col0" class="data row10 col0" >11:16</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row10_col1" class="data row10 col1" >12:46</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row10_col2" class="data row10 col2" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row10_col3" class="data row10 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row10_col4" class="data row10 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row10_col5" class="data row10 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row10_col6" class="data row10 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row10_col7" class="data row10 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row10_col8" class="data row10 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row10_col9" class="data row10 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row10_col10" class="data row10 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row10_col11" class="data row10 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row10_col12" class="data row10 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row10_col13" class="data row10 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row10_col14" class="data row10 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row11" class="row_heading level0 row11" >2017-04-05</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row11_col0" class="data row11 col0" >12:43</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row11_col1" class="data row11 col1" >12:51</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row11_col2" class="data row11 col2" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row11_col3" class="data row11 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row11_col4" class="data row11 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row11_col5" class="data row11 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row11_col6" class="data row11 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row11_col7" class="data row11 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row11_col8" class="data row11 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row11_col9" class="data row11 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row11_col10" class="data row11 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row11_col11" class="data row11 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row11_col12" class="data row11 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row11_col13" class="data row11 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row11_col14" class="data row11 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row12" class="row_heading level0 row12" >2017-04-14</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row12_col0" class="data row12 col0" >10:59</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row12_col1" class="data row12 col1" >12:17</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row12_col2" class="data row12 col2" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row12_col3" class="data row12 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row12_col4" class="data row12 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row12_col5" class="data row12 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row12_col6" class="data row12 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row12_col7" class="data row12 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row12_col8" class="data row12 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row12_col9" class="data row12 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row12_col10" class="data row12 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row12_col11" class="data row12 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row12_col12" class="data row12 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row12_col13" class="data row12 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row12_col14" class="data row12 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row13" class="row_heading level0 row13" >2017-05-29</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row13_col0" class="data row13 col0" >12:42</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row13_col1" class="data row13 col1" >12:50</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row13_col2" class="data row13 col2" >12:56</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row13_col3" class="data row13 col3" >16:53</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row13_col4" class="data row13 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row13_col5" class="data row13 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row13_col6" class="data row13 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row13_col7" class="data row13 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row13_col8" class="data row13 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row13_col9" class="data row13 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row13_col10" class="data row13 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row13_col11" class="data row13 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row13_col12" class="data row13 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row13_col13" class="data row13 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row13_col14" class="data row13 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row14" class="row_heading level0 row14" >2017-06-05</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row14_col0" class="data row14 col0" >14:40</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row14_col1" class="data row14 col1" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row14_col2" class="data row14 col2" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row14_col3" class="data row14 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row14_col4" class="data row14 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row14_col5" class="data row14 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row14_col6" class="data row14 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row14_col7" class="data row14 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row14_col8" class="data row14 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row14_col9" class="data row14 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row14_col10" class="data row14 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row14_col11" class="data row14 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row14_col12" class="data row14 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row14_col13" class="data row14 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row14_col14" class="data row14 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row15" class="row_heading level0 row15" >2017-06-09</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row15_col0" class="data row15 col0" >12:18</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row15_col1" class="data row15 col1" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row15_col2" class="data row15 col2" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row15_col3" class="data row15 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row15_col4" class="data row15 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row15_col5" class="data row15 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row15_col6" class="data row15 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row15_col7" class="data row15 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row15_col8" class="data row15 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row15_col9" class="data row15 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row15_col10" class="data row15 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row15_col11" class="data row15 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row15_col12" class="data row15 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row15_col13" class="data row15 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row15_col14" class="data row15 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row16" class="row_heading level0 row16" >2017-06-20</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row16_col0" class="data row16 col0" >12:51</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row16_col1" class="data row16 col1" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row16_col2" class="data row16 col2" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row16_col3" class="data row16 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row16_col4" class="data row16 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row16_col5" class="data row16 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row16_col6" class="data row16 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row16_col7" class="data row16 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row16_col8" class="data row16 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row16_col9" class="data row16 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row16_col10" class="data row16 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row16_col11" class="data row16 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row16_col12" class="data row16 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row16_col13" class="data row16 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row16_col14" class="data row16 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row17" class="row_heading level0 row17" >2017-06-22</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row17_col0" class="data row17 col0" >16:14</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row17_col1" class="data row17 col1" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row17_col2" class="data row17 col2" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row17_col3" class="data row17 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row17_col4" class="data row17 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row17_col5" class="data row17 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row17_col6" class="data row17 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row17_col7" class="data row17 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row17_col8" class="data row17 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row17_col9" class="data row17 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row17_col10" class="data row17 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row17_col11" class="data row17 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row17_col12" class="data row17 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row17_col13" class="data row17 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row17_col14" class="data row17 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row18" class="row_heading level0 row18" >2017-07-18</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row18_col0" class="data row18 col0" >12:41</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row18_col1" class="data row18 col1" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row18_col2" class="data row18 col2" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row18_col3" class="data row18 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row18_col4" class="data row18 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row18_col5" class="data row18 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row18_col6" class="data row18 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row18_col7" class="data row18 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row18_col8" class="data row18 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row18_col9" class="data row18 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row18_col10" class="data row18 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row18_col11" class="data row18 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row18_col12" class="data row18 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row18_col13" class="data row18 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row18_col14" class="data row18 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row19" class="row_heading level0 row19" >2017-07-25</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row19_col0" class="data row19 col0" >17:25</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row19_col1" class="data row19 col1" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row19_col2" class="data row19 col2" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row19_col3" class="data row19 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row19_col4" class="data row19 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row19_col5" class="data row19 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row19_col6" class="data row19 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row19_col7" class="data row19 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row19_col8" class="data row19 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row19_col9" class="data row19 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row19_col10" class="data row19 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row19_col11" class="data row19 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row19_col12" class="data row19 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row19_col13" class="data row19 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row19_col14" class="data row19 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row20" class="row_heading level0 row20" >2017-07-26</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row20_col0" class="data row20 col0" >15:45</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row20_col1" class="data row20 col1" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row20_col2" class="data row20 col2" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row20_col3" class="data row20 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row20_col4" class="data row20 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row20_col5" class="data row20 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row20_col6" class="data row20 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row20_col7" class="data row20 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row20_col8" class="data row20 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row20_col9" class="data row20 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row20_col10" class="data row20 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row20_col11" class="data row20 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row20_col12" class="data row20 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row20_col13" class="data row20 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row20_col14" class="data row20 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row21" class="row_heading level0 row21" >2017-08-03</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row21_col0" class="data row21 col0" >14:27</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row21_col1" class="data row21 col1" >15:43</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row21_col2" class="data row21 col2" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row21_col3" class="data row21 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row21_col4" class="data row21 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row21_col5" class="data row21 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row21_col6" class="data row21 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row21_col7" class="data row21 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row21_col8" class="data row21 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row21_col9" class="data row21 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row21_col10" class="data row21 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row21_col11" class="data row21 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row21_col12" class="data row21 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row21_col13" class="data row21 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row21_col14" class="data row21 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row22" class="row_heading level0 row22" >2017-08-07</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row22_col0" class="data row22 col0" >12:43</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row22_col1" class="data row22 col1" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row22_col2" class="data row22 col2" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row22_col3" class="data row22 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row22_col4" class="data row22 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row22_col5" class="data row22 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row22_col6" class="data row22 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row22_col7" class="data row22 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row22_col8" class="data row22 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row22_col9" class="data row22 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row22_col10" class="data row22 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row22_col11" class="data row22 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row22_col12" class="data row22 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row22_col13" class="data row22 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row22_col14" class="data row22 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row23" class="row_heading level0 row23" >2017-08-10</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row23_col0" class="data row23 col0" >14:44</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row23_col1" class="data row23 col1" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row23_col2" class="data row23 col2" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row23_col3" class="data row23 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row23_col4" class="data row23 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row23_col5" class="data row23 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row23_col6" class="data row23 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row23_col7" class="data row23 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row23_col8" class="data row23 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row23_col9" class="data row23 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row23_col10" class="data row23 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row23_col11" class="data row23 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row23_col12" class="data row23 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row23_col13" class="data row23 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row23_col14" class="data row23 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row24" class="row_heading level0 row24" >2017-08-11</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row24_col0" class="data row24 col0" >12:43</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row24_col1" class="data row24 col1" >14:20</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row24_col2" class="data row24 col2" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row24_col3" class="data row24 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row24_col4" class="data row24 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row24_col5" class="data row24 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row24_col6" class="data row24 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row24_col7" class="data row24 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row24_col8" class="data row24 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row24_col9" class="data row24 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row24_col10" class="data row24 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row24_col11" class="data row24 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row24_col12" class="data row24 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row24_col13" class="data row24 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row24_col14" class="data row24 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row25" class="row_heading level0 row25" >2017-08-14</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row25_col0" class="data row25 col0" >11:44</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row25_col1" class="data row25 col1" >12:49</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row25_col2" class="data row25 col2" >12:50</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row25_col3" class="data row25 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row25_col4" class="data row25 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row25_col5" class="data row25 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row25_col6" class="data row25 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row25_col7" class="data row25 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row25_col8" class="data row25 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row25_col9" class="data row25 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row25_col10" class="data row25 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row25_col11" class="data row25 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row25_col12" class="data row25 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row25_col13" class="data row25 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row25_col14" class="data row25 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row26" class="row_heading level0 row26" >2017-08-23</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row26_col0" class="data row26 col0" >12:45</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row26_col1" class="data row26 col1" >14:58</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row26_col2" class="data row26 col2" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row26_col3" class="data row26 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row26_col4" class="data row26 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row26_col5" class="data row26 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row26_col6" class="data row26 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row26_col7" class="data row26 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row26_col8" class="data row26 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row26_col9" class="data row26 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row26_col10" class="data row26 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row26_col11" class="data row26 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row26_col12" class="data row26 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row26_col13" class="data row26 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row26_col14" class="data row26 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row27" class="row_heading level0 row27" >2017-08-28</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row27_col0" class="data row27 col0" >10:58</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row27_col1" class="data row27 col1" >11:14</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row27_col2" class="data row27 col2" >11:18</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row27_col3" class="data row27 col3" >11:38</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row27_col4" class="data row27 col4" >12:39</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row27_col5" class="data row27 col5" >14:29</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row27_col6" class="data row27 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row27_col7" class="data row27 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row27_col8" class="data row27 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row27_col9" class="data row27 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row27_col10" class="data row27 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row27_col11" class="data row27 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row27_col12" class="data row27 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row27_col13" class="data row27 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row27_col14" class="data row27 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row28" class="row_heading level0 row28" >2017-08-29</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row28_col0" class="data row28 col0" >12:22</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row28_col1" class="data row28 col1" >12:43</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row28_col2" class="data row28 col2" >12:44</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row28_col3" class="data row28 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row28_col4" class="data row28 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row28_col5" class="data row28 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row28_col6" class="data row28 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row28_col7" class="data row28 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row28_col8" class="data row28 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row28_col9" class="data row28 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row28_col10" class="data row28 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row28_col11" class="data row28 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row28_col12" class="data row28 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row28_col13" class="data row28 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row28_col14" class="data row28 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row29" class="row_heading level0 row29" >2017-09-08</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row29_col0" class="data row29 col0" >12:58</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row29_col1" class="data row29 col1" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row29_col2" class="data row29 col2" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row29_col3" class="data row29 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row29_col4" class="data row29 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row29_col5" class="data row29 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row29_col6" class="data row29 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row29_col7" class="data row29 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row29_col8" class="data row29 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row29_col9" class="data row29 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row29_col10" class="data row29 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row29_col11" class="data row29 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row29_col12" class="data row29 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row29_col13" class="data row29 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row29_col14" class="data row29 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row30" class="row_heading level0 row30" >2017-09-13</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row30_col0" class="data row30 col0" >15:17</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row30_col1" class="data row30 col1" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row30_col2" class="data row30 col2" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row30_col3" class="data row30 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row30_col4" class="data row30 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row30_col5" class="data row30 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row30_col6" class="data row30 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row30_col7" class="data row30 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row30_col8" class="data row30 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row30_col9" class="data row30 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row30_col10" class="data row30 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row30_col11" class="data row30 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row30_col12" class="data row30 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row30_col13" class="data row30 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row30_col14" class="data row30 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row31" class="row_heading level0 row31" >2017-09-15</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row31_col0" class="data row31 col0" >11:37</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row31_col1" class="data row31 col1" >12:07</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row31_col2" class="data row31 col2" >12:41</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row31_col3" class="data row31 col3" >12:43</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row31_col4" class="data row31 col4" >14:45</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row31_col5" class="data row31 col5" >14:47</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row31_col6" class="data row31 col6" >14:49</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row31_col7" class="data row31 col7" >15:12</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row31_col8" class="data row31 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row31_col9" class="data row31 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row31_col10" class="data row31 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row31_col11" class="data row31 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row31_col12" class="data row31 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row31_col13" class="data row31 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row31_col14" class="data row31 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row32" class="row_heading level0 row32" >2017-09-19</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row32_col0" class="data row32 col0" >12:19</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row32_col1" class="data row32 col1" >12:35</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row32_col2" class="data row32 col2" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row32_col3" class="data row32 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row32_col4" class="data row32 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row32_col5" class="data row32 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row32_col6" class="data row32 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row32_col7" class="data row32 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row32_col8" class="data row32 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row32_col9" class="data row32 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row32_col10" class="data row32 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row32_col11" class="data row32 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row32_col12" class="data row32 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row32_col13" class="data row32 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row32_col14" class="data row32 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row33" class="row_heading level0 row33" >2017-09-25</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row33_col0" class="data row33 col0" >16:39</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row33_col1" class="data row33 col1" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row33_col2" class="data row33 col2" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row33_col3" class="data row33 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row33_col4" class="data row33 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row33_col5" class="data row33 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row33_col6" class="data row33 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row33_col7" class="data row33 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row33_col8" class="data row33 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row33_col9" class="data row33 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row33_col10" class="data row33 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row33_col11" class="data row33 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row33_col12" class="data row33 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row33_col13" class="data row33 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row33_col14" class="data row33 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row34" class="row_heading level0 row34" >2017-10-02</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row34_col0" class="data row34 col0" >17:43</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row34_col1" class="data row34 col1" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row34_col2" class="data row34 col2" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row34_col3" class="data row34 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row34_col4" class="data row34 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row34_col5" class="data row34 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row34_col6" class="data row34 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row34_col7" class="data row34 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row34_col8" class="data row34 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row34_col9" class="data row34 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row34_col10" class="data row34 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row34_col11" class="data row34 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row34_col12" class="data row34 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row34_col13" class="data row34 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row34_col14" class="data row34 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row35" class="row_heading level0 row35" >2017-10-03</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row35_col0" class="data row35 col0" >16:19</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row35_col1" class="data row35 col1" >16:35</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row35_col2" class="data row35 col2" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row35_col3" class="data row35 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row35_col4" class="data row35 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row35_col5" class="data row35 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row35_col6" class="data row35 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row35_col7" class="data row35 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row35_col8" class="data row35 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row35_col9" class="data row35 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row35_col10" class="data row35 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row35_col11" class="data row35 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row35_col12" class="data row35 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row35_col13" class="data row35 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row35_col14" class="data row35 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row36" class="row_heading level0 row36" >2017-10-04</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row36_col0" class="data row36 col0" >12:36</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row36_col1" class="data row36 col1" >12:47</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row36_col2" class="data row36 col2" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row36_col3" class="data row36 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row36_col4" class="data row36 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row36_col5" class="data row36 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row36_col6" class="data row36 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row36_col7" class="data row36 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row36_col8" class="data row36 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row36_col9" class="data row36 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row36_col10" class="data row36 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row36_col11" class="data row36 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row36_col12" class="data row36 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row36_col13" class="data row36 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row36_col14" class="data row36 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row37" class="row_heading level0 row37" >2017-10-05</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row37_col0" class="data row37 col0" >12:23</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row37_col1" class="data row37 col1" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row37_col2" class="data row37 col2" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row37_col3" class="data row37 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row37_col4" class="data row37 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row37_col5" class="data row37 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row37_col6" class="data row37 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row37_col7" class="data row37 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row37_col8" class="data row37 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row37_col9" class="data row37 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row37_col10" class="data row37 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row37_col11" class="data row37 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row37_col12" class="data row37 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row37_col13" class="data row37 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row37_col14" class="data row37 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row38" class="row_heading level0 row38" >2017-10-13</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row38_col0" class="data row38 col0" >11:59</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row38_col1" class="data row38 col1" >15:12</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row38_col2" class="data row38 col2" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row38_col3" class="data row38 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row38_col4" class="data row38 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row38_col5" class="data row38 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row38_col6" class="data row38 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row38_col7" class="data row38 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row38_col8" class="data row38 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row38_col9" class="data row38 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row38_col10" class="data row38 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row38_col11" class="data row38 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row38_col12" class="data row38 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row38_col13" class="data row38 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row38_col14" class="data row38 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row39" class="row_heading level0 row39" >2017-11-02</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row39_col0" class="data row39 col0" >12:42</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row39_col1" class="data row39 col1" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row39_col2" class="data row39 col2" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row39_col3" class="data row39 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row39_col4" class="data row39 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row39_col5" class="data row39 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row39_col6" class="data row39 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row39_col7" class="data row39 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row39_col8" class="data row39 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row39_col9" class="data row39 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row39_col10" class="data row39 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row39_col11" class="data row39 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row39_col12" class="data row39 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row39_col13" class="data row39 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row39_col14" class="data row39 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row40" class="row_heading level0 row40" >2017-11-06</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row40_col0" class="data row40 col0" >15:49</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row40_col1" class="data row40 col1" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row40_col2" class="data row40 col2" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row40_col3" class="data row40 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row40_col4" class="data row40 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row40_col5" class="data row40 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row40_col6" class="data row40 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row40_col7" class="data row40 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row40_col8" class="data row40 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row40_col9" class="data row40 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row40_col10" class="data row40 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row40_col11" class="data row40 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row40_col12" class="data row40 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row40_col13" class="data row40 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row40_col14" class="data row40 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row41" class="row_heading level0 row41" >2017-12-25</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row41_col0" class="data row41 col0" >12:19</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row41_col1" class="data row41 col1" >12:20</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row41_col2" class="data row41 col2" >14:39</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row41_col3" class="data row41 col3" >14:52</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row41_col4" class="data row41 col4" >14:54</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row41_col5" class="data row41 col5" >15:04</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row41_col6" class="data row41 col6" >15:14</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row41_col7" class="data row41 col7" >15:15</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row41_col8" class="data row41 col8" >15:23</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row41_col9" class="data row41 col9" >15:25</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row41_col10" class="data row41 col10" >16:02</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row41_col11" class="data row41 col11" >16:48</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row41_col12" class="data row41 col12" >17:04</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row41_col13" class="data row41 col13" >17:16</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row41_col14" class="data row41 col14" >17:22</td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row42" class="row_heading level0 row42" >2017-12-26</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row42_col0" class="data row42 col0" >12:45</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row42_col1" class="data row42 col1" >12:46</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row42_col2" class="data row42 col2" >12:48</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row42_col3" class="data row42 col3" >12:57</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row42_col4" class="data row42 col4" >14:08</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row42_col5" class="data row42 col5" >14:58</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row42_col6" class="data row42 col6" >15:43</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row42_col7" class="data row42 col7" >16:40</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row42_col8" class="data row42 col8" >16:48</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row42_col9" class="data row42 col9" >16:51</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row42_col10" class="data row42 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row42_col11" class="data row42 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row42_col12" class="data row42 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row42_col13" class="data row42 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row42_col14" class="data row42 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row43" class="row_heading level0 row43" >2017-12-27</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row43_col0" class="data row43 col0" >11:55</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row43_col1" class="data row43 col1" >14:38</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row43_col2" class="data row43 col2" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row43_col3" class="data row43 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row43_col4" class="data row43 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row43_col5" class="data row43 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row43_col6" class="data row43 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row43_col7" class="data row43 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row43_col8" class="data row43 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row43_col9" class="data row43 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row43_col10" class="data row43 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row43_col11" class="data row43 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row43_col12" class="data row43 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row43_col13" class="data row43 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row43_col14" class="data row43 col14" ></td>
+            </tr>
+            <tr>
+                        <th id="T_a8721fe4_318b_11eb_a19f_acde48001122level0_row44" class="row_heading level0 row44" >2017-12-28</th>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row44_col0" class="data row44 col0" >11:49</td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row44_col1" class="data row44 col1" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row44_col2" class="data row44 col2" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row44_col3" class="data row44 col3" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row44_col4" class="data row44 col4" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row44_col5" class="data row44 col5" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row44_col6" class="data row44 col6" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row44_col7" class="data row44 col7" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row44_col8" class="data row44 col8" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row44_col9" class="data row44 col9" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row44_col10" class="data row44 col10" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row44_col11" class="data row44 col11" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row44_col12" class="data row44 col12" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row44_col13" class="data row44 col13" ></td>
+                        <td id="T_a8721fe4_318b_11eb_a19f_acde48001122row44_col14" class="data row44 col14" ></td>
+            </tr>
+    </tbody></table>
 </div>
 
 </div>
