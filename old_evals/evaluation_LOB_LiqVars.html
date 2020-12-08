@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>evaluation</title>
+<title>evaluation_LOB_LiqVars</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13100,8 +13100,6 @@ div#notebook {
 <li><p>Plots of model performance</p>
 </li>
 </ul>
-<h2 id="Other-evaluations:">Other evaluations:<a class="anchor-link" href="#Other-evaluations:">&#182;</a></h2><p><a href="https://quantumyilmaz.github.io/SPHS20/evaluation_LiqVars.html">Liquidity Measures</a></p>
-<p><a href="https://quantumyilmaz.github.io/SPHS20/evaluation_3.html">LOB</a></p>
 
 </div>
 </div>
@@ -13400,6 +13398,12 @@ Estimated Total Size (MB): 1.31
 <span class="n">mse_val</span> <span class="o">=</span> <span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">i</span><span class="o">-</span><span class="n">j</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">y_v</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="n">y_v_pred</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))]</span>
 <span class="n">mape_train</span> <span class="o">=</span> <span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">j</span><span class="o">/</span><span class="n">i</span><span class="p">))</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">y_t</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="n">y_t_pred</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))]</span>
 <span class="n">mape_val</span> <span class="o">=</span> <span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">j</span><span class="o">/</span><span class="n">i</span><span class="p">))</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">y_v</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="n">y_v_pred</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))]</span>
+
+<span class="n">errors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span> 
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">l</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">mse_train</span><span class="p">,</span><span class="n">mse_val</span><span class="p">,</span><span class="n">mape_train</span><span class="p">,</span><span class="n">mape_val</span><span class="p">):</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">errors</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">],[</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">]])),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">errors</span> <span class="o">=</span> <span class="n">errors</span><span class="p">[</span><span class="mi">2</span><span class="p">:,:]</span>
+<span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;../errors/LOB+LIQ.npy&#39;</span><span class="p">,</span> <span class="n">errors</span><span class="p">)</span>
 </pre></div>
 
     </div>
