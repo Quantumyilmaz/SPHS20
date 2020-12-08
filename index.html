@@ -68,25 +68,6 @@ body {
   padding-right: 8px;
 }
 
-
-.liq{
-content: "icons/liq.png";
-height: 20px;
-width: 20px;
-}	
-
-.prep{
-content: "icons/prep.png";
-height: 20px;
-width: 20px;
-}
-
-.eval{
-content: "icons/eval.png";
-height: 20px;
-width: 20px;
-}
-
 /* Some media queries for responsiveness */
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
@@ -98,9 +79,9 @@ width: 20px;
 
 <div class="sidenav">
   <a href="#about">About</a>
-  <a href="./LiqVarsDemo.html"><i class="liq"></i>Liquidity Measures</a>
-  <a href="./data_prep.html"><i class="prep"></i>Data Preparation</a>
-  <button class="dropdown-btn"><i class="eval"></i>Model Evaluations 
+  <a href="./LiqVarsDemo.html">Liquidity Measures</a>
+  <a href="./data_prep.html">Data Preparation</a>
+  <button class="dropdown-btn">Model Evaluations 
     <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
@@ -109,6 +90,12 @@ width: 20px;
     <a href="./evaluation_LOB_LiqVars.html">LOB + Liquidity Measures</a>
   </div>
   <a href="./summary.html"></i>Summary of Results</a>
+  <button class="dropdown-btn">Old Evaluations 
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a href="./old_evals/evaluation_LiqVars.html">Liquidity Measures</a>
+  </div>
 </div>
 
 <div class="main">
