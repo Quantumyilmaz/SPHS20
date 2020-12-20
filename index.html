@@ -85,9 +85,18 @@ body {
     <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
-    <a href="./evaluation_LOB.html" target="_blank">LOB</a>
-    <a href="./evaluation_LIQ.html" target="_blank">Liquidity Measures</a>
-    <a href="./evaluation_LOB+LIQ.html" target="_blank">LOB + Liquidity Measures</a>
+      <button class="dropdown-btn">Window Size 60<i class="fa fa-caret-down"></i>
+      </button>
+          <div class="dropdown-container">
+          <a href="./evaluation_LOB_60.html" target="_blank">LOB</a>
+          <a href="./evaluation_LIQ_60.html" target="_blank">Liquidity Measures</a>
+          <a href="./evaluation_LOB+LIQ_60.html" target="_blank">LOB + Liquidity Measures</a>
+          </div>
+      <button class="dropdown-btn">Window Size 50<i class="fa fa-caret-down"></i>
+      </button>
+          <div class="dropdown-container">
+          <a href="./evaluation_LIQ_50.html" target="_blank">Liquidity Measures</a>
+          </div>
   </div>
   <a href="./summary.html" target="_blank"></i>Results/Analysis</a>
   <button class="dropdown-btn">Old Evaluations 
@@ -138,7 +147,8 @@ body {
 </ol>
   
   <h2>Changelog</h2>
-  <p><b>Model Evaluations</b></p>
+  Window sizes are given in round brackets.
+  <p><b>Model Evaluations (60)</b></p>
   <p><em>Updated on</em> 17.12.2020. 
   Added convergence curves. Retrained models with LR scheduler tolerance set from 20 to 30, which gave slightly better results.</p>
   <p><span style="opacity: 0.3;"><em>Updated on</em> 14.12.2020. Added linear model benchmark.</p>
@@ -188,4 +198,4 @@ for (i = 0; i < dropdown.length; i++) {
 </script>
 
 </body>
-</html> 
+</html>
