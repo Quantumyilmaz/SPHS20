@@ -78,12 +78,14 @@ body {
 <body>
 
 <div class="sidenav">
-  <a href="#about/changelog">About/Changelog</a>
+  <a href="#about">About</a>
   <a href="./LiqVarsDemo.html" target="_blank">Liquidity Measures</a>
   <a href="./data_prep.html" target="_blank">Data Preparation</a>
+  
   <button class="dropdown-btn">Model Evaluations 
     <i class="fa fa-caret-down"></i>
   </button>
+  
   <div class="dropdown-container">
       <button class="dropdown-btn">Window Size 60<i class="fa fa-caret-down"></i>
       </button>
@@ -102,9 +104,13 @@ body {
   <button class="dropdown-btn">Old Evaluations 
     <i class="fa fa-caret-down"></i>
   </button>
+  
   <div class="dropdown-container">
     <a href="./old_evals/evaluation_LOB+LIQ.html" target="_blank">LOB + Liquidity Measures</a>
   </div>
+  
+  <a href="./changelog.html">Changelog</a>
+  
 </div>
 
 <div class="main">
@@ -145,45 +151,6 @@ body {
   </li>
   <li><b>Old Evaluations:</b> Evaluations of models used previously.</li>
 </ol>
-  
-  <h2>Changelog</h2>
-  Window sizes are given in round brackets.
-  
-  <p><b>Model Evaluations (50)</b></p>
-  <p><em>Updated on</em> 21.12.2020. Added evaluation of liquidity measures.
-  
-  
-  <p><b>Model Evaluations (60)</b></p>
-  
-      <p><em>Updated on</em> 17.12.2020. 
-        Added convergence curves. Retrained models with LR scheduler tolerance set from 20 to 30, which gave slightly better results.</p>
-      
-      <p><span style="opacity: 0.3;"><em>Updated on</em> 14.12.2020. Added linear model benchmark.</p>
-
-          <pre>       |<b>LOB:</b> <em>Updated on</em> 17.12.2020</pre>
-          <pre><span style="opacity: 0.3;">       |<b>LOB:</b> <em>Updated on</em> 14.12.2020</pre>
-
-
-
-
-          <pre>       |<b>Liquidity Measures:</b> <em>Updated on</em> 17.12.2020</pre>
-          <pre><span style="opacity: 0.3;">       |<b>Liquidity Measures:</b> <em>Updated on</em> 14.12.2020</pre>
-
-
-
-          <pre>       |<b>LOB + Liquidity Measures:</b> <em>Updated on</em> 17.12.2020</pre>
-          <pre>       		Used 128 nodes on the hidden layers instead of 64, which gave slightly better results.</pre>
-          <pre>       		Old model in 'Old Evaluations'.</pre>
-
-          <pre><span style="opacity: 0.3;">       |<b>LOB + Liquidity Measures:</b> <em>Updated on</em> 14.12.2020</pre>
-
-  
-  
-  
-  
-  <p><b>Results/Analysis:</b></p>
-  <p><em>Updated on</em> 17.12.2020. Update due to updated model evaluations.</p>
-  <p><span style="opacity: 0.3;"><em>Updated on</em> 14.12.2020. Added histograms of errors and autocorrelation analysis.</p>
   
 </div>
 
