@@ -78,7 +78,7 @@ body {
 <body>
 
 <div class="sidenav">
-  <a href="./index.html">About</a>
+  <a href="#about">About</a>
   <a href="./LiqVarsDemo.html" target="_blank">Liquidity Measures</a>
   <a href="./data_prep.html" target="_blank">Data Preparation</a>
   
@@ -87,12 +87,12 @@ body {
   </button>
   
   <div class="dropdown-container">
-      <button class="dropdown-btn">Window Size 60<i class="fa fa-caret-down"></i>
+      <button class="dropdown-btn">Window Size 40<i class="fa fa-caret-down"></i>
       </button>
           <div class="dropdown-container">
-              <a href="./evaluation_LOB_60.html" target="_blank">LOB</a>
-              <a href="./evaluation_LIQ_60.html" target="_blank">Liquidity Measures</a>
-              <a href="./evaluation_LOB+LIQ_60.html" target="_blank">LOB + Liquidity Measures</a>
+         <!-- <a href="./evaluation_LOB_40.html" target="_blank">LOB</a> -->
+              <a href="./evaluation_LIQ_40.html" target="_blank">Liquidity Measures</a>
+         <!-- <a href="./evaluation_LOB+LIQ_40.html" target="_blank">LOB + Liquidity Measures</a> -->
           </div>
       <button class="dropdown-btn">Window Size 50<i class="fa fa-caret-down"></i>
       </button>
@@ -100,6 +100,13 @@ body {
               <a href="./evaluation_LOB_50.html" target="_blank">LOB</a>
               <a href="./evaluation_LIQ_50.html" target="_blank">Liquidity Measures</a>
               <a href="./evaluation_LOB+LIQ_50.html" target="_blank">LOB + Liquidity Measures</a>
+          </div>
+      <button class="dropdown-btn">Window Size 60<i class="fa fa-caret-down"></i>
+      </button>
+          <div class="dropdown-container">
+              <a href="./evaluation_LOB_60.html" target="_blank">LOB</a>
+              <a href="./evaluation_LIQ_60.html" target="_blank">Liquidity Measures</a>
+              <a href="./evaluation_LOB+LIQ_60.html" target="_blank">LOB + Liquidity Measures</a>
           </div>
   </div>
   <a href="./summary.html" target="_blank"></i>Results/Analysis</a>
@@ -120,6 +127,8 @@ body {
   <h2>Changelog</h2>
   Window sizes are given in round brackets.
   
+  <p><b>Model Evaluations (40)</b></p>
+  <p><em>Updated on</em> 24.12.2020. Added evaluation of LIQ.</p>
   <p><b>Model Evaluations (50)</b></p>
   <p><em>Updated on</em> 23.12.2020. Added evaluation of LOB.</p>
   <p style="opacity: 0.3;"><em>Updated on</em> 23.12.2020. Added evaluation of LOB+LIQ.</p>
