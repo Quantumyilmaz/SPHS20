@@ -98,4 +98,5 @@ body {
   @media screen and (max-height: 450px) {
     .data_table {
       text-align: center;}
+    .sidenav a {font-size: 10px;}
   }
