@@ -95,7 +95,7 @@ body {
   }
   
   /* Some media queries for responsiveness */
-  @media screen and (max-height: 450px) {
+  @media screen and (max-height: 800px) {
     .data_table {
       text-align: center;}
     .sidenav a {font-size: 10px;}
