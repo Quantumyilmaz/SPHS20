@@ -96,7 +96,8 @@ body {
   
   /* Some media queries for responsiveness */
   @media screen and (max-height: 800px) {
-    .data_table {
-      text-align: center;}
-    .sidenav a {font-size: 10px;}
+    .sidenav a , .dropdown-btn{font-size: 15px;}
+    h2.new{font-size: 50;}
+    .main{font-size: 10px;}
+
   }
