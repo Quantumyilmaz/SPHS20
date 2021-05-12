@@ -2,24 +2,27 @@ body {
     font-family: "Lato", sans-serif;
   }
   
-  h2.new {
-    font: 100px/1 times new roman,Palatino,Optima;
-    color: black;
-    text-shadow: 10px 4px 10px rgba(0,0,0,0.2);
-    text-align:center;
-  }
+h2.new {
+  font: 100px/1 Optima,Palatino,times new roman;
+  color: black;
+  text-shadow: 10px 4px 10px rgba(0,0,0,0.2);
+  text-align:center;
+  margin: 0px;
+}
 
-  h2.new2 {
-    font: 50px/-1 times new roman,Palatino,Optima;
-    color: black;
-    text-shadow: 10px 4px 10px rgba(0,0,0,0.2);
-    text-align:center;
-  }
+h2.new2 {
+  font: 40px/1 Optima,Palatino,times new roman;
+  color: black;
+  text-shadow: 10px 4px 10px rgba(0,0,0,0.2);
+  text-align:center;
+  margin: 0px;
+}
   
   /* Fixed sidenav, full height */
   .sidenav {
+    float: left;
     height: 100%;
-    width: auto;
+    width: 20%;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -53,6 +56,9 @@ body {
   .topnav {
     overflow: hidden;
     position: fixed;
+    width: 80%;
+    height: auto;
+    margin-left: 20%;
     top:0px;
     left:0px;
     background-color: #333;
@@ -104,8 +110,8 @@ body {
   /* Some media queries for responsiveness */
   @media screen and (max-height: 600px) {
     .sidenav a , .dropdown-btn{font-size: 15px;}
-    h2.new{font-size: 30px;}
-    h2.new2{font-size: 20px;}
+    h2.new{font-size: 40px;}
+    h2.new2{font-size: 15px;}
     .main{font-size: 10px;}
     .topnav a {font-size: 15px;}
 
