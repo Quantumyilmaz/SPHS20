@@ -4,81 +4,17 @@
 <title>SPHS20</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-body {
-  font-family: "Lato", sans-serif;
-}
+<link rel="stylesheet" href="SP.css">
 
-/* Fixed sidenav, full height */
-.sidenav {
-  height: 100%;
-  width: 200px;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #111;
-  overflow-x: hidden;
-  padding-top: 20px;
-}
-
-/* Style the sidenav links and the dropdown button */
-.sidenav a, .dropdown-btn {
-  padding: 6px 8px 6px 16px;
-  text-decoration: none;
-  font-size: 20px;
-  color: #818181;
-  display: block;
-  border: none;
-  background: none;
-  width: 100%;
-  text-align: left;
-  cursor: pointer;
-  outline: none;
-}
-
-/* On mouse-over */
-.sidenav a:hover, .dropdown-btn:hover {
-  color: #f1f1f1;
-}
-
-/* Main content */
-.main {
-  margin-left: 200px; /* Same as the width of the sidenav */
-  font-size: 20px; /* Increased text to enable scrolling */
-  padding: 0px 10px;
-}
-
-/* Add an active class to the active dropdown button */
-.active {
-  background-color: green;
-  color: white;
-}
-
-/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
-.dropdown-container {
-  display: none;
-  background-color: #262626;
-  padding-left: 8px;
-}
-
-/* Optional: Style the caret down icon */
-.fa-caret-down {
-  float: right;
-  padding-right: 8px;
-}
-
-/* Some media queries for responsiveness */
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 16px;}
-}
-</style>
 </head>
 <body>
 
-<div class="sidenav">
-  <a href="#about">About</a>
+<div class="topnav" id="topnav">
+    <a href="./index.html">MTFS21</a>
+    <a class="active" href="./SP.html">SPHS20</a>
+</div>
+<div class="sidenav" id="sidenav">
+  <a href="#home">Home</a>
   <a href="./LiqVarsDemo.html" target="_blank">Liquidity Measures</a>
   <a href="./data_prep.html" target="_blank">Data Preparation</a>
   
@@ -90,44 +26,44 @@ body {
       <button class="dropdown-btn">Window Size 10<i class="fa fa-caret-down"></i>
       </button>
           <div class="dropdown-container">
-              <a href="./evaluation_LOB_10.html" target="_blank">LOB</a> 
-              <a href="./evaluation_LIQ_10.html" target="_blank">Liquidity Measures</a> 
-              <a href="./evaluation_LOB+LIQ_10.html" target="_blank">LOB + Liquidity Measures</a>
+              <a href="./evals/evaluation_LOB_10.html" target="_blank">LOB</a> 
+              <a href="./evals/evaluation_LIQ_10.html" target="_blank">Liquidity Measures</a> 
+              <a href="./evals/evaluation_LOB+LIQ_10.html" target="_blank">LOB + Liquidity Measures</a>
           </div>
       <button class="dropdown-btn">Window Size 20<i class="fa fa-caret-down"></i>
       </button>
           <div class="dropdown-container">
-              <a href="./evaluation_LOB_20.html" target="_blank">LOB</a> 
-              <a href="./evaluation_LIQ_20.html" target="_blank">Liquidity Measures</a>
-              <a href="./evaluation_LOB+LIQ_20.html" target="_blank">LOB + Liquidity Measures</a>
+              <a href="./evals/evaluation_LOB_20.html" target="_blank">LOB</a> 
+              <a href="./evals/evaluation_LIQ_20.html" target="_blank">Liquidity Measures</a>
+              <a href="./evals/evaluation_LOB+LIQ_20.html" target="_blank">LOB + Liquidity Measures</a>
           </div>
       <button class="dropdown-btn">Window Size 30<i class="fa fa-caret-down"></i>
       </button>
           <div class="dropdown-container">
-              <a href="./evaluation_LOB_30.html" target="_blank">LOB</a>
-              <a href="./evaluation_LIQ_30.html" target="_blank">Liquidity Measures</a>
-              <a href="./evaluation_LOB+LIQ_30.html" target="_blank">LOB + Liquidity Measures</a>
+              <a href="./evals/evaluation_LOB_30.html" target="_blank">LOB</a>
+              <a href="./evals/evaluation_LIQ_30.html" target="_blank">Liquidity Measures</a>
+              <a href="./evals/evaluation_LOB+LIQ_30.html" target="_blank">LOB + Liquidity Measures</a>
           </div>
       <button class="dropdown-btn">Window Size 40<i class="fa fa-caret-down"></i>
       </button>
           <div class="dropdown-container">
-              <a href="./evaluation_LOB_40.html" target="_blank">LOB</a>
-              <a href="./evaluation_LIQ_40.html" target="_blank">Liquidity Measures</a>
-              <a href="./evaluation_LOB+LIQ_40.html" target="_blank">LOB + Liquidity Measures</a>
+              <a href="./evals/evaluation_LOB_40.html" target="_blank">LOB</a>
+              <a href="./evals/evaluation_LIQ_40.html" target="_blank">Liquidity Measures</a>
+              <a href="./evals/evaluation_LOB+LIQ_40.html" target="_blank">LOB + Liquidity Measures</a>
           </div>
       <button class="dropdown-btn">Window Size 50<i class="fa fa-caret-down"></i>
       </button>
           <div class="dropdown-container">
-              <a href="./evaluation_LOB_50.html" target="_blank">LOB</a>
-              <a href="./evaluation_LIQ_50.html" target="_blank">Liquidity Measures</a>
-              <a href="./evaluation_LOB+LIQ_50.html" target="_blank">LOB + Liquidity Measures</a>
+              <a href="./evals/evaluation_LOB_50.html" target="_blank">LOB</a>
+              <a href="./evals/evaluation_LIQ_50.html" target="_blank">Liquidity Measures</a>
+              <a href="./evals/evaluation_LOB+LIQ_50.html" target="_blank">LOB + Liquidity Measures</a>
           </div>
       <button class="dropdown-btn">Window Size 60<i class="fa fa-caret-down"></i>
       </button>
           <div class="dropdown-container">
-              <a href="./evaluation_LOB_60.html" target="_blank">LOB</a>
-              <a href="./evaluation_LIQ_60.html" target="_blank">Liquidity Measures</a>
-              <a href="./evaluation_LOB+LIQ_60.html" target="_blank">LOB + Liquidity Measures</a>
+              <a href="./evals/evaluation_LOB_60.html" target="_blank">LOB</a>
+              <a href="./evals/evaluation_LIQ_60.html" target="_blank">Liquidity Measures</a>
+              <a href="./evals/evaluation_LOB+LIQ_60.html" target="_blank">LOB + Liquidity Measures</a>
           </div>
   </div>
   <a href="./summary.html" target="_blank"></i>Results/Analysis</a>
@@ -143,9 +79,9 @@ body {
   
 </div>
 
-<div class="main">
-  <h2>About</h2>
-  <p>Here are the links to the protocols of the project.</p>
+<div class="main" id="main">
+  <h2 class="new"> SPHS20 </h2>
+  <p style="text-align: center; font-size: 30px;">Project Page</p>
   <ol>
       <li><b>Liquidity Measures:</b>
         <ul>
@@ -189,23 +125,7 @@ body {
   
 </div>
 
-<script>
-/* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
-var dropdown = document.getElementsByClassName("dropdown-btn");
-var i;
-
-for (i = 0; i < dropdown.length; i++) {
-  dropdown[i].addEventListener("click", function() {
-  this.classList.toggle("active");
-  var dropdownContent = this.nextElementSibling;
-  if (dropdownContent.style.display === "block") {
-  dropdownContent.style.display = "none";
-  } else {
-  dropdownContent.style.display = "block";
-  }
-  });
-}
-</script>
+<script src="SP.js"></script>
 
 </body>
 </html>
